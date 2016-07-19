@@ -1,0 +1,22 @@
+A cancer clinic wants to understand how two anti-cancer drugs are being given.  They have given us two datasets: one gives diagnoses by patient and the other dataset gives treatment dates for these patients for the drugs of interest.  
+
+Please don’t spend more than an hour on the exercise, incomplete answers are okay.  For each question please include:
+    - Your code (SQL or other).  If you used SQL, please let us know the dialect.
+    - Results of your code
+    - Your thought process or any necessary explanation for each question.  Hiring managers will review all responses
+    - How long you spent on the question
+
+1.  How many patients does the clinic have for each cancer diagnosis?
+2.  How long after being diagnosed does it take for a patient to start treatment?  Do any patients start treatment before being diagnosed?
+3.  Is there a difference between Drug 201 and Drug 202 in terms of length of treatment?
+
+Patient_Diagnosis:
+    Patient_ID - patient identifier.  Each patient has a unique Patient_ID.
+    Diagnosis_Date - date of diagnosis - YYYY-MM-DD format
+    Diagnosis_Code - an ICD9CM diagnosis code.  See more background at http://www.cdc.gov/nchs/icd/icd9cm.htm
+    Diagnosis - a diagnosis description used for reporting purposes
+
+Patient_Treatment:
+    Patient_ID
+    Treatment_Date - date of treatment - YYYY-MM-DD format
+    Drug_Code - an internal drug identifier.
