@@ -1,4 +1,4 @@
-A cancer clinic wants to understand how two anti-cancer drugs are being given.  They have given us two datasets: one gives diagnoses by patient and the other dataset gives treatment dates for these patients for the drugs of interest.  
+A cancer clinic wants to understand how two anti-cancer drugs are being given.  They have given us two datasets: one gives diagnoses by patient and the other dataset gives treatment dates for these patients for the drugs of interest.
 
 Please don’t spend more than an hour on the exercise, incomplete answers are okay.  For each question please include:
     - Your code (SQL or other).  If you used SQL, please let us know the dialect.
