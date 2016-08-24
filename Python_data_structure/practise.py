@@ -49,9 +49,18 @@ def convert_from_decimal_larger_bases(number, base):
 def test_convert_from_decimal_larger_bases():
     number, base = 31, 16
     assert (convert_from_decimal_larger_bases(number,base) == '1F')
-    
+
 def convert_dec_to_any_base_rec(number, base):
     convertstring = '0123456789ABCDEFGHIJ'
     if number < base : return convertstring[number]
     else:
         return convert_dec_to_any_base_rec(number//base) + convert_dec_to_any_base_rec(number % base)
+def test_convert_dec_to_any_base_rec(module_name == 'this module'):
+    number = 9
+    base = 2
+    assert(convert_dec_to_any_base_rec(number ,base ) == '1001')
+def finding_gcd(a,b):
+    while(b! = 0):
+        result = b
+        a, b = b , a%b
+    return result
