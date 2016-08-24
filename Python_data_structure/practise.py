@@ -55,12 +55,16 @@ def convert_dec_to_any_base_rec(number, base):
     if number < base : return convertstring[number]
     else:
         return convert_dec_to_any_base_rec(number//base) + convert_dec_to_any_base_rec(number % base)
-def test_convert_dec_to_any_base_rec(module_name == 'this module'):
+def test_convert_dec_to_any_base_rec():
     number = 9
     base = 2
     assert(convert_dec_to_any_base_rec(number ,base ) == '1001')
 def finding_gcd(a,b):
-    while(b! = 0):
+    while(b != 0):
         result = b
         a, b = b , a%b
     return result
+def test_finding_gcd():
+    number1 = 21
+    number2 = 12
+    assert(finding_gcd(number1,number2)==3)
