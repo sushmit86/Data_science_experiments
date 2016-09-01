@@ -2,6 +2,7 @@ from decimal import Decimal
 import random
 import math
 import numpy as np
+import time
 
 print((999).bit_length())
 ####
@@ -164,3 +165,36 @@ def testing_numpy():
     print(np.sqrt(ax))
     print(np.cos(ax))
     print(ax - ay)
+    print('Where')
+    print(np.where(ax<10,ax,10))
+    m = np.matrix([ax,ay,ax])
+    print('m')
+    print(m)
+    print(m.T)
+    print('Grid')
+    grid1 = np.zeros(shape=(10,10), dtype=float)
+    grid2 = np.ones(shape=(10,10), dtype=float)
+    print(grid1)
+    print(grid2)
+    print(grid1[1]+ 10)
+    print(grid2[:,2]*2)
+
+def trad_version():
+    t1 = time.time()
+    X = range(10**7)
+    Y = range(10**7)
+    Z = []
+    for i in range(len(X)):
+        Z.append(X[i] + Y[i])
+    print('traditional version')
+    return  time.time()  - t1
+
+def numpy_version():
+    t1 = time.time()
+    X = np.arange(10**7)
+    Y = np.arange(10**7)
+    Z = X + Y
+    print('Numpy version')
+    return time.time() - t1
+
+
