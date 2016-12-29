@@ -43,3 +43,5 @@ venv
 **/.Rhistory
 **/Current.Rproj
 **/*.pdf
+*.csv
+
