@@ -1,0 +1,6 @@
+satData <- read.csv("http://goo.gl/UDv12g")
+satData$Segment <-  factor(satData$Segment)
+head(satData)
+summary(satData)
+library(corrplot)
+corrplot.mixed(cor(satData[,-3]))
