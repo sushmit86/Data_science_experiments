@@ -1,0 +1,21 @@
+---
+title: "R Notebook"
+output: html_document
+---
+
+Creating the data set
+
+```{r}
+# creating the data in R
+k.stores <- 20
+k.weeks <- 104
+store.df <- data.frame(matrix(NA,ncol= 10, nrow = k.stores*k.weeks))
+names(store.df) <- c("storenum","Year","Week","p1sales","p2sales","p1price","p2price","p1prom","p2prom","country")
+dim(store.df)
+store.num <- 101:(100 + k.stores)
+
+```
+
+
+
+
