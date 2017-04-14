@@ -14,6 +14,16 @@ names(store.df) <- c("storenum","Year","Week","p1sales","p2sales","p1price","p2p
 dim(store.df)
 store.num <- 101:(100 + k.stores)
 
+(store.cty <- c(rep("US", 3), rep("DE", 5), rep("GB", 3), rep("BR", 2),
+                rep("JP", 4), rep("AU", 1), rep("CN", 2)))
+length(store.cty)    # make sure the country list is the right length
+store.df$storeNum <- rep(store.num, each=k.weeks)
+store.df$country  <- rep(store.cty, each=k.weeks)
+store.df$Week <- rep(1:52, times=k.stores*2)
+rm(store.num, store.cty)    # clean up
+store.df$Week <- rep(1:52, times=k.stores*2)
+store.df$Year  <- rep(rep(1:2, each=k.weeks/2), times=k.stores)
+str(store.df)
 ```
 
 
