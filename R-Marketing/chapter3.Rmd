@@ -24,8 +24,70 @@ rm(store.num, store.cty)    # clean up
 store.df$Week <- rep(1:52, times=k.stores*2)
 store.df$Year  <- rep(rep(1:2, each=k.weeks/2), times=k.stores)
 str(store.df)
+
+store.df$storeNum <- factor(store.df$storeNum)
+store.df$country  <- factor(store.df$country)
+str(store.df)
+
+head(store.df)   # defaults to 6 rows
+head(store.df, 120)  # 120 rows is enough to check 2 stores
+tail(store.df, 120)  # make sure end looks OK too
+# set random seed to make the random sequences replicable
+set.seed(98250)  # a favorite US postal code
+# promotion status, using binomial distribution, rbinom()
+store.df$p1prom <- rbinom(n=nrow(store.df), size=1, p=0.1)  # 10% promoted
+store.df$p2prom <- rbinom(n=nrow(store.df), size=1, p=0.15) # 15%
+head(store.df)
+# prices
+store.df$p1price <- sample(x=c(2.19, 2.29, 2.49, 2.79, 2.99), 
+                           size=nrow(store.df), replace=TRUE)
+store.df$p2price <- sample(x=c(2.29, 2.49, 2.59, 2.99, 3.19), 
+                           size=nrow(store.df), replace=TRUE)
+# sales data, using poisson (counts) distribution, rpois()
+# first, the default sales in the absence of promotion
+tmp.sales1 <- rpois(nrow(store.df), lambda=120)  # lambda = mean sales per week
+tmp.sales2 <- rpois(nrow(store.df), lambda=100)  # lambda = mean sales per week
+# scale sales according to the ratio of log(price)
+tmp.sales1 <- tmp.sales1 * log(store.df$p2price) / log(store.df$p1price)
+tmp.sales2 <- tmp.sales2 * log(store.df$p1price) / log(store.df$p2price)
+# final sales get a 30% or 40% lift when promoted
+store.df$p1sales <- floor(tmp.sales1 * (1 + store.df$p1prom*0.3))
+store.df$p2sales <- floor(tmp.sales2 * (1 + store.df$p2prom*0.4))
+head(store.df)
+# install.packages("car")  #only run once
+library(car)
+some(store.df, 10)
+
+```
+Now let us do some analysis
+```{r}
+table(store.df$p1price)
+p1.table <- table(store.df$p1price)
+p1.table
+str(p1.table)
+plot(p1.table)
+
+table(store.df$p1price, store.df$p1prom)
+p1.table2 <- table(store.df$p1price, store.df$p1prom)
+p1.table2[, 2] / (p1.table2[, 1] + p1.table2[, 2])
 ```
 
 
+Now writing functions
+```{r}
+min(store.df$p1sales)
+max(store.df$p2sales)
+
+mean(store.df$p1prom)
+median(store.df$p2sales)
+
+var(store.df$p1sales)
+sd(store.df$p1sales)
+IQR(store.df$p1sales)
+mad(store.df$p1sales)
+quantile(store.df$p1sales, probs=c(0.25,0.50,0.75))   # interquartile range
+quantile(store.df$p1sales, probs=c(0.05, 0.95))  # central 90%
+quantile(store.df$p1sales, probs=0:10/10)
+```
 
 
