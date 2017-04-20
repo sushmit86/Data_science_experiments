@@ -88,6 +88,13 @@ mad(store.df$p1sales)
 quantile(store.df$p1sales, probs=c(0.25,0.50,0.75))   # interquartile range
 quantile(store.df$p1sales, probs=c(0.05, 0.95))  # central 90%
 quantile(store.df$p1sales, probs=0:10/10)
+quantile(store.df$p1sales, probs=c(0.25,0.50,0.75))   # interquartile range
+quantile(store.df$p1sales, probs=c(0.05, 0.95))  # central 90%
+quantile(store.df$p1sales, probs=0:10/10)
+```
+
+```{r}
+mysummary.df <- data.frame(matrix(NA, nrow=2, ncol=2))
 ```
 
 

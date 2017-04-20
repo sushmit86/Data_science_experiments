@@ -297,8 +297,9 @@ abline(v=quantile(store.df$p1sales, pr=0.9), lty=3)
 by(store.df$p1sales, store.df$storeNum, mean)
 by(store.df$p1sales, list(store.df$storeNum, store.df$Year), mean)
 
-aggregate(store.df$p1sales, by=list(country=store.df$country), sum)
+df2= aggregate(store.df$p1sales, by=list(country=store.df$country,Year=store.df$Year), sum)
 
+t1 = by(store.df$p1sales, store.df$storeNum, mean)
 
 ############
 # world map 
