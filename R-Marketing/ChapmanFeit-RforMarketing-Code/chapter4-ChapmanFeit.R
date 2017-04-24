@@ -41,7 +41,7 @@
 #
 # and then:
 #   cust.df$cust.id <- factor(cust.df$cust.id)
-
+library(ggplot2)
 set.seed(21821)
 ncust <- 1000
 cust.df <- data.frame(cust.id=factor(1:ncust))
@@ -53,8 +53,10 @@ cust.df$email <- factor(sample(c("yes", "no"), size=ncust, replace=TRUE,
 cust.df$distance.to.store <- exp(rnorm(n=ncust, mean=2, sd=1.2)) 
 summary(cust.df)
 
-# Try it!: plot(hist(distance.to.store))
 
+# Try it!: plot(hist(distance.to.store))
+#plot(hist(cust.df$distance.to.store))
+ggplot(cust.df, aes(distance.to.store)) + geom_histogram()
 cust.df$online.visits <- rnbinom(ncust, size=0.3, 
                          mu = 15 + ifelse(cust.df$email=="yes", 15, 0) 
                               - 0.7 * (cust.df$age-median(cust.df$age))) 
