@@ -1,0 +1,16 @@
+theList <- list(A = matrix(1:9, 3), B = 1:5, C = matrix(1:4, 2), D = 2) 
+lapply(theList, sum)
+sapply(theList,sum)
+firstList <- list(A = matrix(1:16,4), B = matrix(1:16,2), C= 1:5)
+secondlist <- list(A= matrix(1:16,4), B = matrix(1:16,8), C= 15:1)
+mapply(identical, firstList, secondlist)
+simpleFunc <- function(x,y)
+{
+  NROW(x) + NROW(y)
+}
+mapply(simpleFunc,firstList, secondlist)
+require(ggplot2)
+data(diamonds)
+head(diamonds)
+aggregate(price ~ cut, diamonds, mean)
+aggregate(diamonds$price, by= list(cut = diamonds$cut), mean)

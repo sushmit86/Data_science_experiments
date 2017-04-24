@@ -322,3 +322,7 @@ mapCountryData(p1sales.map, nameColumnToPlot="x",
                catMethod="fixedWidth", addLegend=FALSE)
 
 
+
+
+
+
