@@ -1,5 +1,5 @@
 graphics.off()
-rm(list=ls(all=TRUE))
+(list=ls(all=TRUE))
 fileNameRoot="BernMetrop" # for output filenames
 source("DBDA2E-utilities.R")
 
@@ -59,7 +59,7 @@ for ( t in 1:(trajLength-1) ) {
 	# Use the proposal distribution to generate a proposed jump.
 	proposedJump = rnorm( 1 , mean=0 , sd=proposalSD )
 	# Compute the probability of accepting the proposed jump.
-	probAccept = min( 1,
+  	probAccept = min( 1,
 		targetRelProb( currentPosition + proposedJump , myData )
 		/ targetRelProb( currentPosition , myData ) )
 	# Generate a random uniform value from the interval [0,1] to
