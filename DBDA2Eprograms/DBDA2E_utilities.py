@@ -26,6 +26,8 @@ def HDIofMCMC(sampleVec, credMass=0.95 ):
 	  #     interval that is to be estimated.
 	  # Value:
 	  #   HDIlim is a vector containing the limits of the HDI
+	  # We will avoid using this function instead of that we will be using pymc3 
+	  # pymc3.stats.hpd(a)
 	sorted_points = sorted(sampleVec)
 	ciIdxInc = np.ceil(credMass * len(sorted_points)).astype('int')
 	nCIs = len(sorted_points) - ciIdxInc
@@ -36,9 +38,30 @@ def HDIofMCMC(sampleVec, credMass=0.95 ):
 	HDImax = sorted_points[ciWidth.index(min(ciWidth))+ciIdxInc]
 	return(HDImin, HDImax)
 
-def plotPost(paramSampleVec, cenTend = "mode", col = None,showCurve=FALSE):
-	if col is None: col = "skyblue" : color = col
-	print('test')
+def plotPost(paramSampleVec, cenTend = 'mode', col = None, showCurve=False ,title = None):
+	col = 'skyblue' if col is None else col 
+	data = [go.Histogram(x=paramSampleVec ,histnorm='probability',marker=dict(
+        color=col,
+    ))]
+	layout = go.Layout(
+    title=title,
+    xaxis=dict(
+        title='$\\theta$',
+        dtick=0.2
+
+    ),
+    yaxis=dict(
+        showgrid=False,
+        autotick=False
+
+    ),
+    bargap=0.2
+    )
+
+	fig = go.Figure(data=data,layout = layout)
+	return py.iplot(fig)
+
+
 
 
 
