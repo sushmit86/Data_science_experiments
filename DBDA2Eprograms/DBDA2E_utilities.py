@@ -7,7 +7,7 @@
 #### Bokeh libraries
 
 from bokeh.plotting import figure, show
-from bokeh.models import Label
+from bokeh.models import Label,FixedTicker,ColumnDataSource,LabelSet
 
 import numpy as np
 import scipy as sc
@@ -39,26 +39,37 @@ def HDIofMCMC(sampleVec, credMass=0.95 ):
 	HDImax = sorted_points[ciWidth.index(min(ciWidth))+ciIdxInc]
 	return(HDImin, HDImax)
 
-def plotPost(paramSampleVec, cenTend = 'mode', col = None, showCurve=False ,title = None,xlab = None):
+def plotPost(paramSampleVec, cenTend = 'mode', col = None, showCurve=False ,title = None,xlab = None,credMass=0.95):
     col = 'skyblue' if col is None else col 
     xlab = 'θ' if xlab is None else xlab
     hist, edges = np.histogram(paramSampleVec, density=True, bins=20)
     cenTendHt = 0.9*max(hist)
     mode=sc.stats.mode(paramSampleVec)[0][0]
-
+    HDI= pymc3.stats.hpd(paramSampleVec,alpha = 1 - credMass)
     ## Bokeh plotting
     p1 = figure(title=title,tools="save")
-    p1.quad(top=hist, bottom=0.00001, left=edges[:-1], right=edges[1:],
+    bottom=0.00001
+    HDI_x = [ round(HDI[0],2), round(HDI[1],2)]
+    HDI_y = [bottom,bottom]
+    source = ColumnDataSource(data=dict(HDI_x = HDI_x,HDI_y =HDI_y))
+    p1.quad(top=hist, bottom=bottom, left=edges[:-1], right=edges[1:],
         fill_color=col, line_color="white")
-    p1.ygrid.visible = False
-    p1.yaxis.visible = False
-    p1.xgrid.visible = False
+    p1.line([HDI[0],HDI[1]], [bottom,bottom], line_width=2,line_color= "black")
+
     mode_label = Label(x=mode, y=cenTendHt, x_units='data', y_units='data',
                  text='mode = {0:.2f}'.format(mode), render_mode='css',
                  border_line_color='white', border_line_alpha=1.0,
                  background_fill_color='white', background_fill_alpha=1.0)
+    labels = LabelSet(x='HDI_x', y='HDI_y', text='HDI_x', level='glyph', source=source, render_mode='canvas')
     p1.add_layout(mode_label)
+    p1.add_layout(labels)
     p1.xaxis.axis_label = xlab
+    p1.xaxis.minor_tick_line_color = None
+    p1.xaxis.bounds = (0, 1)
+    p1.ygrid.visible = False
+    p1.yaxis.visible = False
+    p1.xgrid.visible = False
+
     return p1
 
 
