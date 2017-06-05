@@ -2,17 +2,18 @@
 # This module tries to replicate DBDA2E-utilities.R second edition
 # Implemented in Python 3.6
 
-import warnings
+
+
+#### Bokeh libraries
+
+from bokeh.plotting import figure, show
+from bokeh.models import Label
+
 import numpy as np
 import scipy as sc
-warnings.filterwarnings("ignore")
-import plotly.plotly as py
-import plotly.graph_objs as go
-from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
-from scipy import stats
 import pymc3
 
-init_notebook_mode(connected=True)
+
 
 
 def HDIofMCMC(sampleVec, credMass=0.95 ):
@@ -38,28 +39,27 @@ def HDIofMCMC(sampleVec, credMass=0.95 ):
 	HDImax = sorted_points[ciWidth.index(min(ciWidth))+ciIdxInc]
 	return(HDImin, HDImax)
 
-def plotPost(paramSampleVec, cenTend = 'mode', col = None, showCurve=False ,title = None):
-	col = 'skyblue' if col is None else col 
-	data = [go.Histogram(x=paramSampleVec ,histnorm='probability',marker=dict(
-        color=col,
-    ))]
-	layout = go.Layout(
-    title=title,
-    xaxis=dict(
-        title='$\\theta$',
-        dtick=0.2
+def plotPost(paramSampleVec, cenTend = 'mode', col = None, showCurve=False ,title = None,xlab = None):
+    col = 'skyblue' if col is None else col 
+    xlab = 'θ' if xlab is None else xlab
+    hist, edges = np.histogram(paramSampleVec, density=True, bins=20)
+    cenTendHt = 0.9*max(hist)
+    mode=sc.stats.mode(paramSampleVec)[0][0]
 
-    ),
-    yaxis=dict(
-        showgrid=False,
-        autotick=False
-
-    ),
-    bargap=0.2
-    )
-
-	fig = go.Figure(data=data,layout = layout)
-	return py.iplot(fig)
+    ## Bokeh plotting
+    p1 = figure(title=title,tools="save")
+    p1.quad(top=hist, bottom=0.00001, left=edges[:-1], right=edges[1:],
+        fill_color=col, line_color="white")
+    p1.ygrid.visible = False
+    p1.yaxis.visible = False
+    p1.xgrid.visible = False
+    mode_label = Label(x=mode, y=cenTendHt, x_units='data', y_units='data',
+                 text='mode = {0:.2f}'.format(mode), render_mode='css',
+                 border_line_color='white', border_line_alpha=1.0,
+                 background_fill_color='white', background_fill_alpha=1.0)
+    p1.add_layout(mode_label)
+    p1.xaxis.axis_label = xlab
+    return p1
 
 
 
