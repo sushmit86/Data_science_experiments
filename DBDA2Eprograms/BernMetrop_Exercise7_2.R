@@ -116,6 +116,17 @@ if ( burnIn > 0 ) {
   text( 0.5 , burnIn+1 , "Burn In" , adj=c(0.5,1.1) )
 }
 
+openGraph(height = 7,width =3.5)
+layout(matrix(1:2, nrow =2))
+acf(acceptedTraj,lag.max = 30,col = "skyblue",lwd =3)
+Len = length(acceptedTraj)
+Lag = 10
+trajHead = acceptedTraj[1:(Len - Lag)]
+trajTail = acceptedTraj[(1 + Lag) : Len]
+plot(trajHead, trajTail, pch = ".",col = "skyblue", 
+     main = bquote(list ("Prpsl.SD" ==.(proposalSD),
+                   lag == .(Lag),
+        cor == .(round(cor(trajHead,trajTail),3)))))
 #saveGraph( file=paste0( fileNameRoot , 
 #                        "SD" , proposalSD ,
 #                        "Init" , trajectory[1] ) , type="eps" )

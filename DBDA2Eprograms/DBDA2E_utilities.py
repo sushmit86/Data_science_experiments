@@ -4,11 +4,11 @@
 
 
 
-#### Bokeh libraries
-
+#### Bokeh libraries used for plotting
 from bokeh.plotting import figure
 from bokeh.models import Label,FixedTicker,ColumnDataSource,LabelSet
-
+#### 
+import pandas as pd
 import numpy as np
 import scipy as sc
 import pymc3
@@ -78,6 +78,9 @@ def plotPost(paramSampleVec, cenTend = 'mode', col = None, showCurve=False ,titl
     p1.xgrid.visible = False
     p1.title.align = 'center'
     return p1
+
+def ACF_plot(paramSampleVec,line_width=2,line_color = "skyblue",lag.max = 30):
+    p1 = figure(tools ="")
 
 
 
