@@ -79,8 +79,20 @@ def plotPost(paramSampleVec, cenTend = 'mode', col = None, showCurve=False ,titl
     p1.title.align = 'center'
     return p1
 
-def ACF_plot(paramSampleVec,line_width=2,line_color = "skyblue",lag.max = 30):
-    p1 = figure(tools ="")
+def ACF_plot(paramSampleVec,line_width=2,line_color = "skyblue",lag_max = 30,title='Series AcceptedTraj',xlab= 'lag',ylab = 'ACF'):
+    p1 = figure(tools ="",title=title)
+    x = np.arange(lag_max)
+    y = np.empty(lag_max)
+    for i in x:
+        y[i] = pd.Series(paramSampleVec).autocorr(lag =i)
+    p1.vbar(x=x,top=y,width=0)
+    p1.xaxis.axis_label = xlab
+    p1.yaxis.axis_label = ylab
+    p1.ygrid.visible = False
+    p1.xgrid.visible = False
+    p1.xaxis.minor_tick_line_color = None
+    p1.yaxis.minor_tick_line_color = None
+    return p1
 
 
 
