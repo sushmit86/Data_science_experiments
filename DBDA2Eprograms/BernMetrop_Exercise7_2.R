@@ -127,8 +127,3 @@ plot(trajHead, trajTail, pch = ".",col = "skyblue",
      main = bquote(list ("Prpsl.SD" ==.(proposalSD),
                    lag == .(Lag),
         cor == .(round(cor(trajHead,trajTail),3)))))
-#saveGraph( file=paste0( fileNameRoot , 
-#                        "SD" , proposalSD ,
-#                        "Init" , trajectory[1] ) , type="eps" )
-
-#------------------------------------------------------------------------
