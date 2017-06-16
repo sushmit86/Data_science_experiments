@@ -1,0 +1,18 @@
+---
+title: "Chapter_12"
+output: html_notebook
+---
+
+
+```{r}
+library(arules)
+data("Groceries")
+summary(Groceries)
+```
+
+```{r}
+inspect(head(Groceries,3))
+typeof(Groceries)
+```
+
+

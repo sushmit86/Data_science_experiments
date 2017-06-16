@@ -1,0 +1,65 @@
+---
+title: "test4"
+author: "sushmit"
+date: "June 15, 2017"
+output:
+  ioslides_presentation: default
+  slidy_presentation: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## R Markdown
+
+This is R markdown. Inserting table
+
+
+## Slide with Bullets
+
+- Bullet 20
+- Bullet 2
+- Bullet 3
+
+## Slide with R Output
+
+```{r cars, echo = FALSE}
+summary(cars)
+```
+
+## Slide with Plot
+
+```{r pressure}
+plot(pressure)
+```
+
+## Slide with R Output
+
+```{r}
+# ggplot2 examples
+library(ggplot2) 
+
+# create factors with value labels 
+mtcars$gear <- factor(mtcars$gear,levels=c(3,4,5),
+  	labels=c("3gears","4gears","5gears")) 
+mtcars$am <- factor(mtcars$am,levels=c(0,1),
+  	labels=c("Automatic","Manual")) 
+mtcars$cyl <- factor(mtcars$cyl,levels=c(4,6,8),
+   labels=c("4cyl","6cyl","8cyl")) 
+
+
+
+# Scatterplot of mpg vs. hp for each combination of gears and cylinders
+# in each facet, transmittion type is represented by shape and color
+qplot(hp, mpg, data=mtcars, shape=am, color=am, 
+   facets=gear~cyl, size=I(3),
+   xlab="Horsepower", ylab="Miles per Gallon") 
+
+
+```
+
+
+
+
+
