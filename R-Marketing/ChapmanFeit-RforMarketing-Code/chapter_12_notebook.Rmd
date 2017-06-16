@@ -1,6 +1,6 @@
 ---
-title: "Chapter_12"
-output: html_notebook
+title: "Chapter_12",1
+output: html_notebook,2
 ---
 
 
@@ -13,6 +13,9 @@ summary(Groceries)
 ```{r}
 inspect(head(Groceries,3))
 typeof(Groceries)
+```
+```{r}
+groc.rules <- apriori(Groceries, parameter = list(supp =0.01,conf=0.3,target = "rules"))
 ```
 
 
