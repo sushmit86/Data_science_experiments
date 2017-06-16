@@ -174,11 +174,14 @@ $(document).ready(function () {
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShhcnVsZXMpXG5kYXRhKFwiR3JvY2VyaWVzXCIpXG5zdW1tYXJ5KEdyb2NlcmllcylcblxuYGBgIn0= -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShhcnVsZXMpXG5kYXRhKFwiR3JvY2VyaWVzXCIpXG5zdW1tYXJ5KEdyb2NlcmllcylcbmBgYCJ9 -->
 <pre class="r"><code>library(arules)
 data(&quot;Groceries&quot;)
-summary(Groceries)
-</code></pre>
+summary(Groceries)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-begin eyJkYXRhIjoidHJhbnNhY3Rpb25zIGFzIGl0ZW1NYXRyaXggaW4gc3BhcnNlIGZvcm1hdCB3aXRoXG4gOTgzNSByb3dzIChlbGVtZW50cy9pdGVtc2V0cy90cmFuc2FjdGlvbnMpIGFuZFxuIDE2OSBjb2x1bW5zIChpdGVtcykgYW5kIGEgZGVuc2l0eSBvZiAwLjAyNjA5MTQ2IFxuXG5tb3N0IGZyZXF1ZW50IGl0ZW1zOlxuICAgICAgd2hvbGUgbWlsayBvdGhlciB2ZWdldGFibGVzICAgICAgIHJvbGxzL2J1bnMgICAgICAgICAgICAgc29kYSBcbiAgICAgICAgICAgIDI1MTMgICAgICAgICAgICAgMTkwMyAgICAgICAgICAgICAxODA5ICAgICAgICAgICAgIDE3MTUgXG4gICAgICAgICAgeW9ndXJ0ICAgICAgICAgIChPdGhlcikgXG4gICAgICAgICAgICAxMzcyICAgICAgICAgICAgMzQwNTUgXG5cbmVsZW1lbnQgKGl0ZW1zZXQvdHJhbnNhY3Rpb24pIGxlbmd0aCBkaXN0cmlidXRpb246XG5zaXplc1xuICAgMSAgICAyICAgIDMgICAgNCAgICA1ICAgIDYgICAgNyAgICA4ICAgIDkgICAxMCAgIDExICAgMTIgICAxMyAgIDE0ICAgMTUgICAxNiBcbjIxNTkgMTY0MyAxMjk5IDEwMDUgIDg1NSAgNjQ1ICA1NDUgIDQzOCAgMzUwICAyNDYgIDE4MiAgMTE3ICAgNzggICA3NyAgIDU1ICAgNDYgXG4gIDE3ICAgMTggICAxOSAgIDIwICAgMjEgICAyMiAgIDIzICAgMjQgICAyNiAgIDI3ICAgMjggICAyOSAgIDMyIFxuICAyOSAgIDE0ICAgMTQgICAgOSAgIDExICAgIDQgICAgNiAgICAxICAgIDEgICAgMSAgICAxICAgIDMgICAgMSBcblxuICAgTWluLiAxc3QgUXUuICBNZWRpYW4gICAgTWVhbiAzcmQgUXUuICAgIE1heC4gXG4gIDEuMDAwICAgMi4wMDAgICAzLjAwMCAgIDQuNDA5ICAgNi4wMDAgIDMyLjAwMCBcblxuaW5jbHVkZXMgZXh0ZW5kZWQgaXRlbSBpbmZvcm1hdGlvbiAtIGV4YW1wbGVzOlxuICAgICAgIGxhYmVscyAgbGV2ZWwyICAgICAgICAgICBsZXZlbDFcbjEgZnJhbmtmdXJ0ZXIgc2F1c2FnZSBtZWF0IGFuZCBzYXVzYWdlXG4yICAgICBzYXVzYWdlIHNhdXNhZ2UgbWVhdCBhbmQgc2F1c2FnZVxuMyAgbGl2ZXIgbG9hZiBzYXVzYWdlIG1lYXQgYW5kIHNhdXNhZ2VcbiJ9 -->
 <pre><code>transactions as itemMatrix in sparse format with
@@ -211,9 +214,8 @@ includes extended item information - examples:
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaW5zcGVjdChoZWFkKEdyb2NlcmllcywzKSlcblxuYGBgIn0= -->
-<pre class="r"><code>inspect(head(Groceries,3))
-</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaW5zcGVjdChoZWFkKEdyb2NlcmllcywzKSlcbmBgYCJ9 -->
+<pre class="r"><code>inspect(head(Groceries,3))</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-begin eyJkYXRhIjoiICAgIGl0ZW1zICAgICAgICAgICAgICAgIFxuWzFdIHtjaXRydXMgZnJ1aXQsICAgICAgIFxuICAgICBzZW1pLWZpbmlzaGVkIGJyZWFkLFxuICAgICBtYXJnYXJpbmUsICAgICAgICAgIFxuICAgICByZWFkeSBzb3Vwc30gICAgICAgIFxuWzJdIHt0cm9waWNhbCBmcnVpdCwgICAgIFxuICAgICB5b2d1cnQsICAgICAgICAgICAgIFxuICAgICBjb2ZmZWV9ICAgICAgICAgICAgIFxuWzNdIHt3aG9sZSBtaWxrfSAgICAgICAgIFxuIn0= -->
 <pre><code>    items                
@@ -233,10 +235,101 @@ includes extended item information - examples:
 <pre><code>[1] &quot;S4&quot;</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ3JvYy5ydWxlcyA8LSBhcHJpb3JpKEdyb2NlcmllcywgcGFyYW1ldGVyID0gbGlzdChzdXBwID0wLjAxLGNvbmY9MC4zLHRhcmdldCA9IFwicnVsZXNcIikpXG5gYGAifQ== -->
+<pre class="r"><code>groc.rules &lt;- apriori(Groceries, parameter = list(supp =0.01,conf=0.3,target = &quot;rules&quot;))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiQXByaW9yaVxuXG5QYXJhbWV0ZXIgc3BlY2lmaWNhdGlvbjpcbiBjb25maWRlbmNlIG1pbnZhbCBzbWF4IGFyZW0gIGF2YWwgb3JpZ2luYWxTdXBwb3J0IG1heHRpbWUgc3VwcG9ydCBtaW5sZW4gbWF4bGVuXG4gICAgICAgIDAuMyAgICAwLjEgICAgMSBub25lIEZBTFNFICAgICAgICAgICAgVFJVRSAgICAgICA1ICAgIDAuMDEgICAgICAxICAgICAxMFxuIHRhcmdldCAgIGV4dFxuICBydWxlcyBGQUxTRVxuXG5BbGdvcml0aG1pYyBjb250cm9sOlxuIGZpbHRlciB0cmVlIGhlYXAgbWVtb3B0IGxvYWQgc29ydCB2ZXJib3NlXG4gICAgMC4xIFRSVUUgVFJVRSAgRkFMU0UgVFJVRSAgICAyICAgIFRSVUVcblxuQWJzb2x1dGUgbWluaW11bSBzdXBwb3J0IGNvdW50OiA5OCBcblxuc2V0IGl0ZW0gYXBwZWFyYW5jZXMgLi4uWzAgaXRlbShzKV0gZG9uZSBbMC4wMHNdLlxuc2V0IHRyYW5zYWN0aW9ucyAuLi5bMTY5IGl0ZW0ocyksIDk4MzUgdHJhbnNhY3Rpb24ocyldIGRvbmUgWzAuMDFzXS5cbnNvcnRpbmcgYW5kIHJlY29kaW5nIGl0ZW1zIC4uLiBbODggaXRlbShzKV0gZG9uZSBbMC4wMHNdLlxuY3JlYXRpbmcgdHJhbnNhY3Rpb24gdHJlZSAuLi4gZG9uZSBbMC4wMHNdLlxuY2hlY2tpbmcgc3Vic2V0cyBvZiBzaXplIDEgMiAzIDQgZG9uZSBbMC4wMXNdLlxud3JpdGluZyAuLi4gWzEyNSBydWxlKHMpXSBkb25lIFswLjAwc10uXG5jcmVhdGluZyBTNCBvYmplY3QgIC4uLiBkb25lIFswLjAxc10uXG4ifQ== -->
+<pre><code>Apriori
+
+Parameter specification:
+ confidence minval smax arem  aval originalSupport maxtime support minlen maxlen
+        0.3    0.1    1 none FALSE            TRUE       5    0.01      1     10
+ target   ext
+  rules FALSE
+
+Algorithmic control:
+ filter tree heap memopt load sort verbose
+    0.1 TRUE TRUE  FALSE TRUE    2    TRUE
+
+Absolute minimum support count: 98 
+
+set item appearances ...[0 item(s)] done [0.00s].
+set transactions ...[169 item(s), 9835 transaction(s)] done [0.01s].
+sorting and recoding items ... [88 item(s)] done [0.00s].
+creating transaction tree ... done [0.00s].
+checking subsets of size 1 2 3 4 done [0.01s].
+writing ... [125 rule(s)] done [0.00s].
+creating S4 object  ... done [0.01s].</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaW5zcGVjdChzdWJzZXQoZ3JvYy5ydWxlcyxsaWZ0ID4zKSlcbmBgYCJ9 -->
+<pre class="r"><code>inspect(subset(groc.rules,lift &gt;3))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgIGxocyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICByaHMgICAgICAgICAgICAgICAgc3VwcG9ydCAgICBjb25maWRlbmNlXG5bMV0ge2JlZWZ9ICAgICAgICAgICAgICAgICAgICAgICAgICAgID0+IHtyb290IHZlZ2V0YWJsZXN9ICAwLjAxNzM4Njg4IDAuMzMxMzk1MyBcblsyXSB7Y2l0cnVzIGZydWl0LHJvb3QgdmVnZXRhYmxlc30gICAgPT4ge290aGVyIHZlZ2V0YWJsZXN9IDAuMDEwMzcxMTIgMC41ODYyMDY5IFxuWzNdIHtjaXRydXMgZnJ1aXQsb3RoZXIgdmVnZXRhYmxlc30gICA9PiB7cm9vdCB2ZWdldGFibGVzfSAgMC4wMTAzNzExMiAwLjM1OTE1NDkgXG5bNF0ge3Ryb3BpY2FsIGZydWl0LHJvb3QgdmVnZXRhYmxlc30gID0+IHtvdGhlciB2ZWdldGFibGVzfSAwLjAxMjMwMzAwIDAuNTg0NTQxMSBcbls1XSB7dHJvcGljYWwgZnJ1aXQsb3RoZXIgdmVnZXRhYmxlc30gPT4ge3Jvb3QgdmVnZXRhYmxlc30gIDAuMDEyMzAzMDAgMC4zNDI3NzYyIFxuICAgIGxpZnQgICAgXG5bMV0gMy4wNDAzNjdcblsyXSAzLjAyOTYwOFxuWzNdIDMuMjk1MDQ1XG5bNF0gMy4wMjA5OTlcbls1XSAzLjE0NDc4MFxuIn0= -->
+<pre><code>    lhs                                  rhs                support    confidence
+[1] {beef}                            =&gt; {root vegetables}  0.01738688 0.3313953 
+[2] {citrus fruit,root vegetables}    =&gt; {other vegetables} 0.01037112 0.5862069 
+[3] {citrus fruit,other vegetables}   =&gt; {root vegetables}  0.01037112 0.3591549 
+[4] {tropical fruit,root vegetables}  =&gt; {other vegetables} 0.01230300 0.5845411 
+[5] {tropical fruit,other vegetables} =&gt; {root vegetables}  0.01230300 0.3427762 
+    lift    
+[1] 3.040367
+[2] 3.029608
+[3] 3.295045
+[4] 3.020999
+[5] 3.144780</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<div id="reading-data" class="section level2">
+<h2>Reading data</h2>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmV0YWlsLnJhdyA8LSByZWFkTGluZXMoXCJodHRwOi8vZ29vLmdsL0ZmakRBT1wiKVxuYGBgIn0= -->
+<pre class="r"><code>retail.raw &lt;- readLines(&quot;http://goo.gl/FfjDAO&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudHlwZW9mKHJldGFpbC5yYXcpXG5gYGAifQ== -->
+<pre class="r"><code>typeof(retail.raw)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiY2hhcmFjdGVyXCJcbiJ9 -->
+<pre><code>[1] &quot;character&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaGVhZChyZXRhaWwucmF3KVxuYGBgIn0= -->
+<pre class="r"><code>head(retail.raw)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiMCAxIDIgMyA0IDUgNiA3IDggOSAxMCAxMSAxMiAxMyAxNCAxNSAxNiAxNyAxOCAxOSAyMCAyMSAyMiAyMyAyNCAyNSAyNiAyNyAyOCAyOSBcIlxuWzJdIFwiMzAgMzEgMzIgXCIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuWzNdIFwiMzMgMzQgMzUgXCIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuWzRdIFwiMzYgMzcgMzggMzkgNDAgNDEgNDIgNDMgNDQgNDUgNDYgXCIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuWzVdIFwiMzggMzkgNDcgNDggXCIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuWzZdIFwiMzggMzkgNDggNDkgNTAgNTEgNTIgNTMgNTQgNTUgNTYgNTcgNTggXCIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuIn0= -->
+<pre><code>[1] &quot;0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 &quot;
+[2] &quot;30 31 32 &quot;                                                                       
+[3] &quot;33 34 35 &quot;                                                                       
+[4] &quot;36 37 38 39 40 41 42 43 44 45 46 &quot;                                               
+[5] &quot;38 39 47 48 &quot;                                                                    
+[6] &quot;38 39 48 49 50 51 52 53 54 55 56 57 58 &quot;                                         </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGFpbChyZXRhaWwucmF3KVxuYGBgIn0= -->
+<pre class="r"><code>tail(retail.raw)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiNDggMjAxIDI1NSAyNzggNDA3IDQ3OSA3NjcgODI0IDk4NiAxMzk1IDE1OTggMjAyMiAyMjgzIDIzNzUgNjcyNSAxMzMzNCAxNDAwNiAxNDA5OSBcIiAgICAgICAgICAgICAgICAgICAgICAgICAgXG5bMl0gXCIzOSA4NzUgMjY2NSAyOTYyIDEyOTU5IDE0MDcwIDE0NDA2IDE1NTE4IDE2Mzc5IFwiICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcblszXSBcIjM5IDQxIDEwMSAzNDYgMzkzIDQxMyA0NzkgNTIyIDU4NiA2MzUgNjk1IDc5OSAxNDY2IDE3ODYgMTk5NCAyNDQ5IDI4MzAgMzAzNSAzNTkxIDM3MjIgNjIxNyAxMTQ5MyAxMjEyOSAxMzAzMyBcIlxuWzRdIFwiMjMxMCA0MjY3IFwiICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG5bNV0gXCIzOSA0OCAyNTI4IFwiICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbls2XSBcIjMyIDM5IDIwNSAyNDIgMTM5MyBcIiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuIn0= -->
+<pre><code>[1] &quot;48 201 255 278 407 479 767 824 986 1395 1598 2022 2283 2375 6725 13334 14006 14099 &quot;                          
+[2] &quot;39 875 2665 2962 12959 14070 14406 15518 16379 &quot;                                                              
+[3] &quot;39 41 101 346 393 413 479 522 586 635 695 799 1466 1786 1994 2449 2830 3035 3591 3722 6217 11493 12129 13033 &quot;
+[4] &quot;2310 4267 &quot;                                                                                                   
+[5] &quot;39 48 2528 &quot;                                                                                                  
+[6] &quot;32 39 205 242 1393 &quot;                                                                                          </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+</div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIkNoYXB0ZXJfMTIiDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQoNCmBgYHtyfQ0KbGlicmFyeShhcnVsZXMpDQpkYXRhKCJHcm9jZXJpZXMiKQ0Kc3VtbWFyeShHcm9jZXJpZXMpDQpgYGANCg0KYGBge3J9DQppbnNwZWN0KGhlYWQoR3JvY2VyaWVzLDMpKQ0KdHlwZW9mKEdyb2NlcmllcykNCmBgYA0KDQoNCg==</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkNoYXB0ZXJfMTIiDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KYGBge3J9DQoNCmBgYA0KDQoNCmBgYHtyfQ0KbGlicmFyeShhcnVsZXMpDQpkYXRhKCJHcm9jZXJpZXMiKQ0Kc3VtbWFyeShHcm9jZXJpZXMpDQpgYGANCg0KYGBge3J9DQppbnNwZWN0KGhlYWQoR3JvY2VyaWVzLDMpKQ0KdHlwZW9mKEdyb2NlcmllcykNCmBgYA0KYGBge3J9DQpncm9jLnJ1bGVzIDwtIGFwcmlvcmkoR3JvY2VyaWVzLCBwYXJhbWV0ZXIgPSBsaXN0KHN1cHAgPTAuMDEsY29uZj0wLjMsdGFyZ2V0ID0gInJ1bGVzIikpDQpgYGANCg0KYGBge3J9DQppbnNwZWN0KHN1YnNldChncm9jLnJ1bGVzLGxpZnQgPjMpKQ0KYGBgDQojI1JlYWRpbmcgZGF0YQ0KYGBge3J9DQpyZXRhaWwucmF3IDwtIHJlYWRMaW5lcygiaHR0cDovL2dvby5nbC9GZmpEQU8iKQ0KDQpgYGANCg0KYGBge3J9DQp0eXBlb2YocmV0YWlsLnJhdykNCmhlYWQocmV0YWlsLnJhdykNCnRhaWwocmV0YWlsLnJhdykNCmBgYA0KDQo=</div>
 
 
 

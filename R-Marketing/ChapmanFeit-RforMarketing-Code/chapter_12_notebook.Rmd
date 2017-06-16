@@ -1,7 +1,10 @@
 ---
-title: "Chapter_12",1
-output: html_notebook,2
+title: "Chapter_12"
+output: html_notebook
 ---
+```{r}
+
+```
 
 
 ```{r}
@@ -18,4 +21,18 @@ typeof(Groceries)
 groc.rules <- apriori(Groceries, parameter = list(supp =0.01,conf=0.3,target = "rules"))
 ```
 
+```{r}
+inspect(subset(groc.rules,lift >3))
+```
+##Reading data
+```{r}
+retail.raw <- readLines("http://goo.gl/FfjDAO")
+
+```
+
+```{r}
+typeof(retail.raw)
+head(retail.raw)
+tail(retail.raw)
+```
 
