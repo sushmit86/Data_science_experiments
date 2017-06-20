@@ -36,3 +36,22 @@ head(retail.raw)
 tail(retail.raw)
 ```
 
+```{r}
+retail.list <- strsplit(retail.raw, " ")
+names <- paste("Trans",1:length(retail.list),sep ="")
+library(car)
+rm(retail.raw)
+str(retail.list)
+retail.trans <- as(retail.list,"transactions")
+summary(retail.trans)
+```
+
+```{r}
+retal.rules <- apriori(retail.trans,parameter = list(supp=0.001,conf =0.4))
+```
+
+```{r}
+library(arulesViz)
+plot(retal.rules,interactive = TRUE)
+```
+
