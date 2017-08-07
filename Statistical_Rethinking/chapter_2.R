@@ -7,7 +7,7 @@ dbinom( 6 , size=9 , prob=0.5 )
 
 ## R code 2.3
 # define grid
-p_grid <- seq( from=0 , to=1 , length.out=20 )
+p_grid <- seq( from=0 , to=1 , length.out=20)
 
 # define prior
 prior <- rep( 1 , 20 )
@@ -35,10 +35,10 @@ prior <- exp( -5*abs( p_grid - 0.5 ) )
 library(rethinking)
 globe.qa <- map(
   alist(
-    w ~ dbinom(9,p) ,  # binomial likelihood
+    w ~ dbinom(36,p) ,  # binomial likelihood
     p ~ dunif(0,1)     # uniform prior
   ) ,
-  data=list(w=6) )
+  data=list(w=24) )
 
 # display summary of quadratic approximation
 precis( globe.qa )
