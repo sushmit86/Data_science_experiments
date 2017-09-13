@@ -9,4 +9,4 @@ posterior <- posterior / sum(posterior)
 samples <- sample( p_grid , prob=posterior , size=1e4 , replace=TRUE )
 
 ## R code 3.4
-plot( samples )
+library(rethinking)
