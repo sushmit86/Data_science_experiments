@@ -45,3 +45,4 @@ venv
 **/*.pdf
 *.csv
 
+maildir/
