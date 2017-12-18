@@ -1,0 +1,110 @@
+---
+title: "Chapter 11"
+output: html_notebook
+---
+ 
+
+```{r}
+seg.raw <- read.csv("http://goo.gl/qw303p")
+head(seg.raw)
+```
+
+```{r}
+seg.df <- seg.raw[,-7] # Remove the known segment assignments
+summary(seg.df)
+head(seg.df)
+```
+
+```{r}
+seg.summ <- function(data, groups) {
+  aggregate(data, list(groups), function(x) mean(as.numeric(x)))
+}
+```
+
+```{r}
+seg.summ(seg.df, seg.raw$Segment)
+```
+
+```{r}
+library(cluster)
+seg.dist <- daisy(seg.df)
+as.matrix(seg.dist)[1:5,1:5]
+```
+
+```{r}
+seg.hc <- hclust(seg.dist, method = "complete")
+plot(seg.hc)
+```
+
+```{r}
+plot(cut(as.dendrogram(seg.hc), h =0.5)$lower[[1]])
+```
+
+```{r}
+seg.df[c(101,107), ]
+```
+
+```{r}
+seg.df[c(278,294), ]
+```
+
+```{r}
+seg.df[c(173,141), ]
+```
+
+```{r}
+cor(cophenetic(seg.hc),seg.dist)
+```
+
+```{r}
+plot(seg.hc)
+rect.hclust(seg.hc, k=4, border = "red")
+```
+
+```{r}
+seg.hc.segment <- cutree(seg.hc, k=4)
+table(seg.hc.segment)
+```
+
+```{r}
+seg.summ(seg.df,seg.hc.segment) 
+```
+
+```{r}
+plot(jitter(as.numeric(seg.df$gender))~ 
+       jitter(as.numeric(seg.df$subscribe)),
+     col = seg.hc.segment, yaxt ="n",xaxt ="n", ylab = " ",
+     xlab ="")
+axis(1, at = c(1,2), labels = c("Subscribe:No", "Subscribe  :Yes"))
+axis(2, at = c(1,2), labels = levels(seg.df$gender))
+```
+
+```{r}
+seg.df.num <- seg.df
+seg.df.num$gender <- ifelse(seg.df$gender== "Male",0,1)
+seg.df.num$ownHome <- ifelse(seg.df$ownHome == "ownNo",0,1)
+seg.df.num$subscribe <- ifelse(seg.df$subscribe =="subNo",0,1)
+summary(seg.df.num)
+```
+
+```{r}
+set.seed(96743)
+seg.k <- kmeans(seg.df.num,centers = 4)
+```
+
+```{r}
+seg.summ(seg.df, seg.k$cluster)
+```
+
+```{r}
+boxplot(seg.df$income ~ seg.k$cluster, ylab = "Income", xlab ="Cluster
+        ")
+```
+
+```{r}
+library(cluster)
+clusplot(seg.df, seg.k$cluster,color = TRUE, shade = TRUE,
+         labels = 4, lines = 0, main = "K-mean cluster plot")
+```
+
+

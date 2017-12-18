@@ -1,0 +1,80 @@
+---
+title: "Chapter 12"
+output: html_notebook
+---
+
+
+
+```{r}
+library("arules")
+data("Groceries")
+summary(Groceries)
+```
+
+```{r}
+inspect(head(Groceries,3))
+```
+
+```{r}
+groc.rules <- apriori(Groceries,parameter = list(supp =0.01, conf =0.3, target = "rules"))
+```
+
+```{r}
+retail.raw <- readLines("http://goo.gl/FfjDAO")
+head(retail.raw)
+```
+
+```{r}
+tail(retail.raw)
+```
+
+```{r}
+summary(retail.raw)
+```
+
+```{r}
+retail.list <- strsplit(retail.raw," ")
+str(retail.list)
+```
+
+```{r}
+
+library(car)
+some(retail.list)
+```
+
+```{r}
+rm(retail.raw)
+```
+
+```{r}
+retail.trans <- as(retail.list, "transactions")
+summary(retail.trans)
+```
+
+```{r}
+retail.rules <- apriori(retail.trans, parameter = list(supp =0.001, conf =0.4))
+```
+
+```{r}
+library(arulesViz)
+plot(retail.rules)
+```
+
+```{r}
+plot(retail.rules,engine = 'interactive' )
+```
+
+```{python, engine.path="C:\\Users\\RoySu001\\AppData\\Local\\Continuum\\Anaconda3"}
+import pandas
+
+```
+
+```{r setup}
+knit_hooks$set(engine = function(before, options, envir) {
+    # detect python, set engine.path
+})
+```
+
+
+
