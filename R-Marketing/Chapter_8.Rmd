@@ -1,0 +1,100 @@
+---
+title: "Chapter 8"
+output: html_notebook
+---
+
+
+```{r}
+brand.ratings <- read.csv("http://goo.gl/IQl8nc")
+head(brand.ratings)
+```
+
+```{r}
+summary(brand.ratings)
+
+```
+
+```{r}
+brand.sc <- brand.ratings
+brand.sc[,1:9] <- scale(brand.ratings[,1:9])
+summary(brand.sc)
+```
+
+```{r}
+library(corrplot)
+corrplot(cor(brand.sc[,1:9]),order = "hclust")
+```
+
+```{r}
+brand.mean <- aggregate(.~ brand, data = brand.sc,mean)
+brand.mean
+```
+
+```{r}
+rownames(brand.mean) <- brand.mean[,1]
+brand.mean <- brand.mean[,-1]
+
+```
+
+```{r}
+brand.mean
+```
+
+```{r}
+library(gplots)
+library(RColorBrewer)
+heatmap.2(as.matrix(brand.mean), col = brewer.pal(9,"GnBu"), trace = "none", key =FALSE,
+          dend = "none", main = "\n\n\n\nBrand attributes")
+```
+
+```{r}
+set.seed(98286)
+xvar <- sample(1:10,100, replace = TRUE)
+yvar <- xvar
+yvar[sample(1:length(yvar),50)] <- sample(1:10,50,replace = TRUE)
+zvar <- yvar
+zvar[sample(1:length(zvar),50)] <- sample(1:10)
+my.vars <- cbind(xvar,yvar,zvar)
+```
+
+```{r}
+plot(yvar ~ xvar, data = jitter(my.vars))
+```
+
+```{r}
+cor(my.vars)
+```
+
+```{r}
+my.pca <- prcomp(my.vars)
+summary(my.pca)
+```
+
+```{r}
+my.pca
+```
+
+```{r}
+cor(my.pca$x)
+```
+
+```{r}
+biplot(my.pca)
+```
+
+```{r}
+brand.pc <- prcomp(brand.sc[,1:9])
+summary(brand.pc)
+```
+
+```{r}
+biplot(brand.pc)
+```
+
+```{r}
+brand.mean
+brand.mu.pc <- prcomp(brand.mean,scale= TRUE)
+summary(brand.mu.pc)
+```
+
+

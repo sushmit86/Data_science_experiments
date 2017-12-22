@@ -1,0 +1,213 @@
+---
+title: "Chapter 7"
+output: html_notebook
+---
+
+ 
+
+```{r}
+sat.df <- read.csv("http://goo.gl/HKnl74")
+str(sat.df)
+
+```
+
+```{r}
+summary(sat.df)
+```
+
+```{r}
+require("gpairs")
+gpairs(sat.df)
+```
+
+```{r}
+sat.df$logdist <- log(sat.df$distance)
+hist(sat.df$logdist)
+```
+
+```{r}
+library("corrplot")
+```
+
+```{r}
+corrplot.mixed(cor(sat.df[, c(2,4:9)]) , upper = "ellipse")
+```
+
+```{r}
+plot(overall ~ rides, data = sat.df, xlab = "Satisfaction with Rides", ylab = "Overall Satisfaction" )
+```
+
+```{r}
+m1 <- lm(overall ~ rides,data = sat.df)
+```
+
+```{r}
+plot(overall ~ rides, data = sat.df, xlab = "Satisfaction with Rides", ylab = "Overall Satisfaction")
+abline(m1, col = 'blue')
+```
+
+```{r}
+str(m1)
+```
+
+```{r}
+m1$coefficients
+```
+
+```{r}
+summary(m1)
+```
+
+```{r}
+confint(m1)
+```
+
+```{r}
+cor(sat.df$overall, sat.df$rides)^2
+```
+
+```{r}
+set.seed(08226)
+x <- rnorm(500)
+y <- x^2 + rnorm(500)
+toy.model <- lm(y~x)
+summary(toy.model)
+```
+
+```{r}
+plot(y ~ x)
+abline(toy.model)
+```
+
+```{r}
+plot(toy.model$fitted.values, toy.model$residuals)
+```
+
+```{r}
+par(mfrow = c(2,2))
+plot(m1)
+```
+
+```{r}
+sat.df[c(57,129,295),]
+```
+
+```{r}
+m2 <- lm( overall ~ rides + games + wait + clean, data = sat.df)
+summary(m2)
+```
+
+```{r}
+library(coefplot)
+coefplot(m2,intercept = FALSE, outerCI=1.96, lwdOuter = 1.5, ylab = "Rating of Feature",
+         xlab = "Association with overall Satisfactions")
+```
+
+```{r}
+par(mfrow = c(2,2))
+plot(m1)
+```
+
+```{r}
+summary(m1)$r.squared
+```
+
+```{r}
+summary(m2)$r.squared
+```
+
+```{r}
+summary(m1)$adj.r.squared
+```
+
+```{r}
+summary(m2)$adj.r.squared
+```
+
+```{r}
+plot(sat.df$overall, fitted(m1),col = 'red', xlim = c(0,100), ylim = c(0,100),
+     xlab = "Actual Overall Satisfaction", ylab = "Fitted Overall Satisfaction")
+points(sat.df$overall, fitted(m2), col = 'blue')
+legend("topleft",legend = c("model 1", "model 2"), col = c("red","blue"),pch =1)
+```
+
+```{r}
+anova(m1, m2)
+```
+
+```{r}
+predict(m2, sat.df[1:10,])
+```
+
+```{r}
+str(sat.df)
+```
+
+```{r}
+
+```
+
+```{r}
+scale(sat.df$rides[1:10])
+```
+
+```{r}
+sat.std <- sat.df[,-3] # remove distance
+sat.std[,3:8] <- scale(sat.std[,3:8])
+head(sat.std)
+```
+
+```{r}
+summary(sat.std)
+```
+
+```{r}
+m3 <- lm( overall ~ rides + games + wait + clean + weekend + logdist + num.child, data = sat.std)
+summary(m3)
+```
+
+```{r}
+sat.std$num.child.factor <- factor(sat.std$num.child)
+m4 <- lm(overall ~ rides + games + wait + clean + weekend + logdist +
+           num.child.factor,data = sat.std)
+summary(m4)
+```
+
+```{r}
+sat.std$has.child <- factor(sat.std$num.child >0)
+m5 <- lm(overall ~ rides + games + wait + clean + logdist + has.child ,data = sat.std)
+summary(m5)
+```
+
+```{r}
+m6 <- lm (overall ~ rides + games + wait + weekend + logdist + has.child + rides:has.child +
+           games:has.child + wait:has.child + clean:has.child + rides:weekend + games:weekend +
+           wait:weekend + clean:weekend , data = sat.std)
+summary(m6)
+```
+
+```{r}
+m7 <- lm(overall ~ rides + games + wait + clean + logdist +has.child + wait:has.child ,
+         data = sat.std)
+summary(m7)
+```
+
+```{r}
+library(coefplot)
+coefplot(m7,intercept = FALSE, outerCI = 1.96, lwdOuter = 1.5,
+         ylab = "Rating of Feature",
+         xlab = "Association with Overall Satisfaction")
+```
+
+```{r}
+library("MCMCpack")
+m7.bayes <- MCMCregress(overall ~ rides + games + wait +  clean + logdist + has.child + wait:has.child, data = sat.std)
+summary(m7.bayes)
+```
+
+
+
+
+
+
+
