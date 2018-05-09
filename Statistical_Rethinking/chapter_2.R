@@ -7,11 +7,11 @@ dbinom( 6 , size=9 , prob=0.5 )
 
 ## R code 2.3
 # define grid
-<<<<<<< HEAD
+
 p_grid <- seq( from=0 , to=1 , length.out=20 )
-=======
+
 p_grid <- seq( from=0 , to=1 , length.out=20)
->>>>>>> d2b19e41c4906ee01f451a8c47b9a1fdbc2e692e
+
 
 # define prior
 prior <- rep( 1 , 20 )
