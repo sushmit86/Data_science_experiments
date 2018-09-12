@@ -1,4 +1,5 @@
 
+#Author:Sushmit Roy
 from sklearn.base import clone
 from sklearn.metrics import accuracy_score
 from collections import OrderedDict
@@ -23,22 +24,21 @@ class SBS():
             X, y, test_size=self.test_size,random_state= self.random_state)
         self.od_set_attributes = OrderedDict()
         self.od_set_attributes[tuple(X.columns)] = self.__calc_score(X_train, X_test, y_train, y_test)
-        set_attributes_current = set(X.columns)
+        list_attributes_current = list(X.columns)
         while (k > self.k_features):
-            attribute_to_exlude = {}
-            for attribute in set_attributes_current:
+            attribute_to_exlude = OrderedDict()
+            for attribute in list_attributes_current:
                 temp_set = {*()} # create an empty set
                 temp_set.add(attribute)
-                train_temp_set = set_attributes_current - temp_set
+                train_temp_set = set(list_attributes_current) - temp_set
                 attribute_to_exlude[tuple(train_temp_set)] = self.__calc_score(
                     X_train.loc[:, train_temp_set], X_test.loc[:, train_temp_set], y_train, y_test)
             max_attribute=max(attribute_to_exlude.items(), key=operator.itemgetter(1))
             self.od_set_attributes[max_attribute[0]]= max_attribute[1]
-            set_attributes_current= set(max_attribute[0])
+            list_attributes_current = list(max_attribute[0])
+            ## This step necessary for consistent results
+            list_attributes_current.sort()
             k = k -1
-        return self
-            
-
 
     def __calc_score(self, X_train, X_test, y_train, y_test):
         self.estimator.fit(X_train,y_train.values.ravel())
