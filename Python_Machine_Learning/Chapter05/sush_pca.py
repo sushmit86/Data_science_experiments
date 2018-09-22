@@ -10,6 +10,8 @@ class PCA():
         eigen_vector = np.fliplr(eigen_vector)
         self.W_transform = eigen_vector[:, 0: self.n_components]
         self.lamda_values = eigen_values
+        self.explaned_varaince_ratio = np.cumsum(
+            self.lamda_values/self.lamda_values.sum())
         return X.dot(self.W_transform)
     def transform(self,X):
         return None
