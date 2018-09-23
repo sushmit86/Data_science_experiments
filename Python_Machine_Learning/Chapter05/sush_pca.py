@@ -14,4 +14,4 @@ class PCA():
             self.lamda_values/self.lamda_values.sum())
         return X.dot(self.W_transform)
     def transform(self,X):
-        return None
+        return X.dot(self.W_transform)
