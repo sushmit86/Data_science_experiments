@@ -36,20 +36,26 @@ class MOITRI_LDA():
         self.n_components = n_components
         return None
     def fit_transform(self,X,y):
-
-        class_mean_vector = np.empty([X.shape[1], len(y.unique())])
-        _class_column = 0
-        for _class in y.unique():
-            class_mean_vector[:, _class_column] = X[(y == _class), :].mean(axis=0)
-            _class_column = _class_column + 1
-
         S_W = np.zeros((X.shape[1], X.shape[1]))
-        for _class in y.unique():
-            S_W = S_W + np.cov(X[(y == _class), :].T)
-        mean_vec = X.mean(axis=0)
         S_B = np.zeros((X.shape[1], X.shape[1]))
-        for _class in y.unique():
-            temp_S_B= X[(y == _class), :].mean(axis=0) - mean_vec
-            temp_S_B = temp_S_B.reshape(X.shape[1],1)
-            S_B = S_B + temp_S_B.dot(temp_S_B.T)
-        return None
+        mean_vec = X.mean(axis=0)
+        mean_vec = mean_vec.reshape(13, 1)
+        for _class in np.sort(y.unique()):
+            S_W = S_W + np.cov(X[(y == _class), :].T)
+            temp_S_B = X[(y == _class), :].mean(axis=0).reshape(13, 1) - mean_vec
+            S_B = S_B + (X[(y == _class)].shape[0])*temp_S_B.dot(temp_S_B.T)
+        eigen_values, eigen_vector = np.linalg.eig(np.linalg.inv(S_W).dot(S_B))
+        list_eigen_pairs = []
+        for _index, _value in np.ndenumerate(eigen_values):
+            list_eigen_pairs.append((_value, eigen_vector[:, _index[0]]))
+        list_eigen_pairs.sort(key=lambda tup: tup[0], reverse=True)
+        for _index, _value in enumerate(list_eigen_pairs):
+            eigen_values[_index] = _value[0]
+            eigen_vector[:, _index] = _value[1]
+        self.w = eigen_vector[:, 0:self.n_components]
+        self.eigen_values = np.abs(eigen_values)
+
+
+    def transform(self, X):
+        return X.dot(self.w)
+
