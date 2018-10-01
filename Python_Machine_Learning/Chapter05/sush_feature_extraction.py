@@ -20,3 +20,19 @@ class PCA():
         return X.dot(self.w)
     def transform(self,X):
         return X.dot(self.w)
+
+class LDA():
+    """
+    Implementation of LDA
+    ------------------------------------------
+    Parameters :
+    X : Array of attributes
+    Y: Output class:
+    Returns
+    ---------------------------------------------
+    Transformation:Matrix W
+    """
+    def __init__(self,n_components=2):
+        self.n_components = n_components
+        return None
+
