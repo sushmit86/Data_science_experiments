@@ -21,7 +21,7 @@ class PCA():
     def transform(self,X):
         return X.dot(self.w)
 
-class LDA():
+class MOITRI_LDA():
     """
     Implementation of LDA
     ------------------------------------------
@@ -36,25 +36,20 @@ class LDA():
         self.n_components = n_components
         return None
     def fit_transform(self,X,y):
-        #class_mean_vector = np.empty([X.shape[0],len(y.unique())])
-        
 
-        ####################### In case we need mean vector#####################
-        # class_mean_vector = np.empty([X_train_std.shape[1],len(y.unique())])
-        # S_W = np.zeros((X_train_std.shape[1],X_train_std.shape[1]))
-        # _class_column = 0
+        class_mean_vector = np.empty([X.shape[1], len(y.unique())])
+        _class_column = 0
+        for _class in y.unique():
+            class_mean_vector[:, _class_column] = X[(y == _class), :].mean(axis=0)
+            _class_column = _class_column + 1
 
-        # for _class in y.unique():
-        #     #class_mean_vector[:,_class_column] = X_train_std[(y_train==_class),:].mean(axis=0)
-        #     #_class_column +=1
-        #     temp_S_W=(X_train_std[(y_train==_class),:]- X_train_std[(y_train==_class),:].mean(axis=0))
-        # #     print(temp_S_W.shape)
-        # #     print(temp_S_W.T.shape)
-        #     S_W = S_W + temp_S_W.T.dot(temp_S_W)
-
-        # print(S_W)
-        class_mean_vector = np.empty([X_train_std.shape[1], len(y.unique())])
         S_W = np.zeros((X.shape[1], X.shape[1]))
         for _class in y.unique():
             S_W = S_W + np.cov(X[(y == _class), :].T)
+        mean_vec = X.mean(axis=0)
+        S_B = np.zeros((X.shape[1], X.shape[1]))
+        for _class in y.unique():
+            temp_S_B= X[(y == _class), :].mean(axis=0) - mean_vec
+            temp_S_B = temp_S_B.reshape(X.shape[1],1)
+            S_B = S_B + temp_S_B.dot(temp_S_B.T)
         return None
