@@ -59,3 +59,7 @@ class MOITRI_LDA():
     def transform(self, X):
         return X.dot(self.w)
 
+
+
+
+
