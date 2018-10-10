@@ -59,7 +59,11 @@ class MOITRI_LDA():
     def transform(self, X):
         return X.dot(self.w)
 
-
+class MOITRI_RBF_Kernel():
+    def __init__(self,gamma,n_components):
+        self.gamma = gamma
+        self.n_components = n_components
+        return None
 
 
 
