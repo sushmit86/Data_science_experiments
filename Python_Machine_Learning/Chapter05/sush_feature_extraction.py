@@ -1,4 +1,7 @@
 import numpy as np
+from scipy.spatial.distance import pdist, squareform
+from scipy import exp
+from scipy.linalg import eigh
 ### it is assumed that both fit_transform 
 # and transform are being passed standard values
 # also fit transform
@@ -60,10 +63,27 @@ class MOITRI_LDA():
         return X.dot(self.w)
 
 class MOITRI_RBF_Kernel():
+    """
+    RBF Kernel PCA Implementation
+    Parameters
+    -------------
+    X: {numppy, ndarray},shape
+    gamma: float
+    n_components : Number of components
+    returns
+    X_pc: {numpy, ndaaray}
+    """
     def __init__(self,gamma,n_components):
         self.gamma = gamma
         self.n_components = n_components
         return None
+    def fit_transform(self,X):
+        ### calculate square distance:
+        squared_dist = pdist(X)
+        ### convert to square form
+        mat_squared_dist = squareform(squared_dist)
+        K = exp(- self.gamma * mat_squared_dist)
+        ndim = K.shape[0]
 
 
 
