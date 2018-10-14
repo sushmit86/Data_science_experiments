@@ -79,11 +79,13 @@ class MOITRI_RBF_Kernel():
         return None
     def fit_transform(self,X):
         ### calculate square distance:
-        squared_dist = pdist(X)
+        squared_dist = pdist(X,'sqeuclidean')
         ### convert to square form
         mat_squared_dist = squareform(squared_dist)
         K = exp(- self.gamma * mat_squared_dist)
         ndim = K.shape[0]
-
-
-
+        I_n = np.ones((ndim,ndim))/ndim
+        K_1 = K - I_n.dot(K) - K.dot(I_n) + I_n.dot(K).dot(I_n)
+        # eigvals, eigvecs = eigh(K_1)
+        eigvecs = eigh(K_1)[1]
+        return eigvecs[:,range(-1,- self.n_components-1,-1)]
