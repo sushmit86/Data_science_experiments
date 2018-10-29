@@ -1,17 +1,17 @@
-#%%
+# %%
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import scipy as sp
+from sklearn import preprocessing
 
 ## Reading data
-#%%
-import matplotlib.pyplot as plt
-import matplotlib as mpl
-import numpy as np
+# %%
+df = pd.read_csv('wdbc.data',header=None)
+df.head()
 
-x = np.linspace(0, 20, 100)
-plt.plot(x, np.sin(x))
-plt.show()
-#%%
-print(3)
-
+# %%
+le = preprocessing.LabelEncoder()
+X = df.iloc[:,2:].values
+Y = df.iloc[:,1].values
+le.fit_transform(Y)
