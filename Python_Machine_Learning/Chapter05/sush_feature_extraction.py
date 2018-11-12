@@ -2,7 +2,7 @@ import numpy as np
 from scipy.spatial.distance import pdist, squareform
 from scipy import exp
 from scipy.linalg import eigh
-### it is assumed that both fit_transform 
+### it is assumed that both fit_transform
 # and transform are being passed standard values
 # also fit transform
 class PCA():
@@ -29,7 +29,7 @@ class MOITRI_LDA():
     Implementation of LDA
     ------------------------------------------
     Parameters :
-    X : standardized array of attributes 
+    X : standardized array of attributes
     Y: Output class correspoding to X
     Returns
     ---------------------------------------------
