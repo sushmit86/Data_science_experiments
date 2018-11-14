@@ -12,7 +12,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import cross_val_score
 from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeigborsClassifier
-from sklearn.tree 
+from sklearn.tree
 # %%
 error_range = np.arange(0.0,1.01,0.01)
 n_classifier = 11
