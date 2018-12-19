@@ -49,3 +49,5 @@ venv
 maildir/
 *.gz
 *.data
+# DS_store
+*.DS_Store
