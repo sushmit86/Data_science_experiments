@@ -1,6 +1,7 @@
 import time
 import ray
-ray.init()
+ray.init(num_cpus=13)
+
 def f1():
     time.sleep(1)
 
@@ -15,7 +16,7 @@ print('Time taken for step 1',elapsed_time)
 
 # The following takes one second (assuming the system has at least ten CPUs).
 start_time = time.time()
-ray.get([f2.remote() for _ in range(10)])
+ray.get([f2.remote() for _ in range(100)])
 elapsed_time = time.time() - start_time
 print('Time taken for step 2',elapsed_time)
 ray.shutdown()
