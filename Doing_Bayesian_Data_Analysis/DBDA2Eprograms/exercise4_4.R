@@ -10,7 +10,7 @@ x = seq( from = xlow , to = xhigh , by = dx )
 # Compute y values, i.e., probability density at each value of x:
 y = ( 1/(sdval*sqrt(2*pi)) ) * exp( -.5 * ((x-meanval)/sdval)^2 )
 # Plot the function. "plot" draws the intervals. "lines" draws the bell curve.
-openGraph(width=7,height=5)
+#openGraph(width=7,height=5)
 plot( x , y , type="h" , lwd=1 , cex.axis=1.5
       , xlab="x" , ylab="p(x)" , cex.lab=1.5 ,
       , main="Normal Probability Density" , cex.main=1.5 )

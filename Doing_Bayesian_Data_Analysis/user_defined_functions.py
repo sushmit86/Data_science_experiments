@@ -25,7 +25,8 @@ def BernGrid(Theta,pTheta,Data):
         raise ValueError("pTheta values must be non-negative")
     if pTheta.sum() != 1:
         raise ValueError("pTheta values must sum to 1.0")
-
+    if not(np.all((Data == 0) | (Data == 1))):
+        raise ValueError("Data values must be 0 or 1")
     z = np.sum(Data) # No of heads
     N = len(Data)
     # Compute the Bernoulli likelihood at each value of Theta:
