@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 from scipy import stats
 import xarray
+import math
 
 np.random.seed(1)
 ### Bokeh Libraries
@@ -23,7 +24,7 @@ def BernGrid(Theta,pTheta,Data):
         raise ValueError("Theta values must be between 0 and 1")
     if np.any(pTheta < 0):
         raise ValueError("pTheta values must be non-negative")
-    if pTheta.sum() != 1:
+    if not(math.isclose(math.fsum(pTheta),1)):
         raise ValueError("pTheta values must sum to 1.0")
     if not(np.all((Data == 0) | (Data == 1))):
         raise ValueError("Data values must be 0 or 1")
@@ -37,14 +38,20 @@ def BernGrid(Theta,pTheta,Data):
     Posterior = (Likelihood * pTheta)/p_Data
     ## plot the Posterior
     plot_prior = figure(plot_width=800, plot_height=250, title='Prior')
+    plot_prior.x_range = Range1d(0,1)
+    plot_prior.y_range = Range1d(0, max(np.append(pTheta,Posterior)))
     plot_prior.vbar(x=Theta, width=0.001, bottom=0,top=pTheta)
 
     ## Plot the likelihood
     plot_likelihood = figure(plot_width=800, plot_height=250, title='Likelihood')
+    plot_likelihood.x_range = Range1d(0, 1)
+    plot_likelihood.y_range = Range1d(0, 1.1*max(Likelihood))
     plot_likelihood.vbar(x=Theta, width=0.001, bottom=0,top=Likelihood)
 
     ## Plot the Posterior
     plot_posterior = figure(plot_width=800, plot_height=250, title='Posterior')
+    plot_posterior.x_range = Range1d(0,1)
+    plot_posterior.y_range = Range1d(0, max(np.append(pTheta,Posterior)))
     plot_posterior.vbar(x=Theta, width=0.001, bottom=0,top=Posterior)
 
     show(column(plot_prior,plot_likelihood,plot_posterior))
