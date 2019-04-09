@@ -36,22 +36,28 @@ def BernGrid(Theta,pTheta,Data):
     ## calculate the Posterior
     p_Data= np.dot(np.multiply(Theta**z,(1-Theta)**(N-z)),pTheta)
     Posterior = (Likelihood * pTheta)/p_Data
-    ## plot the Posterior
+    ## plot the Prior
     plot_prior = figure(plot_width=800, plot_height=250, title='Prior')
     plot_prior.x_range = Range1d(0,1)
     plot_prior.y_range = Range1d(0, max(np.append(pTheta,Posterior)))
+    plot_prior.xaxis.axis_label = 'Θ'
+    plot_prior.yaxis.axis_label = 'p(Θ)'
     plot_prior.vbar(x=Theta, width=0.001, bottom=0,top=pTheta)
 
     ## Plot the likelihood
     plot_likelihood = figure(plot_width=800, plot_height=250, title='Likelihood')
     plot_likelihood.x_range = Range1d(0, 1)
     plot_likelihood.y_range = Range1d(0, 1.1*max(Likelihood))
+    plot_likelihood.xaxis.axis_label = 'Θ'
+    plot_likelihood.yaxis.axis_label = 'p(D|Θ)'
     plot_likelihood.vbar(x=Theta, width=0.001, bottom=0,top=Likelihood)
 
     ## Plot the Posterior
     plot_posterior = figure(plot_width=800, plot_height=250, title='Posterior')
     plot_posterior.x_range = Range1d(0,1)
     plot_posterior.y_range = Range1d(0, max(np.append(pTheta,Posterior)))
+    plot_posterior.xaxis.axis_label = 'Θ'
+    plot_posterior.yaxis.axis_label = 'p(Θ|D)'
     plot_posterior.vbar(x=Theta, width=0.001, bottom=0,top=Posterior)
 
     show(column(plot_prior,plot_likelihood,plot_posterior))
