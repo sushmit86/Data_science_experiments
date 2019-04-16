@@ -4,8 +4,9 @@ import numpy as np
 from scipy import stats
 import xarray
 import math
-
+from scipy.optimize import minimize_scalar
 np.random.seed(1)
+
 ### Bokeh Libraries
 from bokeh.io import output_notebook, show
 from bokeh.plotting import figure
@@ -13,6 +14,12 @@ from bokeh.models import Span,Range1d,Label,LabelSet
 from bokeh.layouts import column,row
 output_notebook()
 
+## matplotlib libraries
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+sns.set()
 
 def BernGrid(Theta,pTheta,Data):
     '''
@@ -61,3 +68,16 @@ def BernGrid(Theta,pTheta,Data):
     plot_posterior.vbar(x=Theta, width=0.001, bottom=0,top=Posterior)
 
     show(column(plot_prior,plot_likelihood,plot_posterior))
+
+
+def HDIofICDF (ICDFname,credMass=0.95,**kwargs):
+    '''
+    ICDFname is the inverse cdf for example : beta.ppf
+    return value: tuple of Highest density iterval (HDI) 
+    '''
+    incredMass =  1.0 - credMass
+    def intervalWidth(lowTailPr):
+        return ICDFname(credMass+ lowTailPr,**kwargs) - ICDFname(lowTailPr,**kwargs)
+    optInfo = minimize_scalar(intervalWidth, bounds= (0,incredMass),method='Golden')
+    HDIlowTailPr = optInfo.x
+    return (ICDFname(HDIlowTailPr,**kwargs),ICDFname(HDIlowTailPr+credMass,**kwargs))
