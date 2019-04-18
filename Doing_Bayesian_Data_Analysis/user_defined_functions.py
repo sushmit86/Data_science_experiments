@@ -5,6 +5,7 @@ from scipy import stats
 import xarray
 import math
 from scipy.optimize import minimize_scalar
+from scipy.stats import beta
 np.random.seed(1)
 
 ### Bokeh Libraries
@@ -73,7 +74,9 @@ def BernGrid(Theta,pTheta,Data):
 def HDIofICDF (ICDFname,credMass=0.95,**kwargs):
     '''
     ICDFname is the inverse cdf for example : beta.ppf
-    return value: tuple of Highest density iterval (HDI) 
+    Use scipy minimize_scalar method. Default to
+    return value: tuple of Highest density iterval (HDI)
+
     '''
     incredMass =  1.0 - credMass
     def intervalWidth(lowTailPr):
@@ -81,3 +84,20 @@ def HDIofICDF (ICDFname,credMass=0.95,**kwargs):
     optInfo = minimize_scalar(intervalWidth, bounds= (0,incredMass),method='Golden')
     HDIlowTailPr = optInfo.x
     return (ICDFname(HDIlowTailPr,**kwargs),ICDFname(HDIlowTailPr+credMass,**kwargs))
+
+def BernBeta(priorBetaAB,Data):
+    '''
+    priorBetaAB: Tuple of beta(a,b) parameters
+    '''
+    # For notational convenience, rename components of priorBetaAB:
+    a = priorBetaAB[0]
+    b = priorBetaAB[1]
+    fig, ax = plt.subplots(3, 1,figsize=(16, 16))
+    Theta = np.arange(0.001,1, 0.001) # points for plotting
+    pTheta = beta.pdf(Theta, a, b) # prior for plotting
+    ax[0].fill_between(Theta, beta.pdf(Theta, a, b))
+    ax[0].set(ylabel = 'test',title = 'Prior(beta)')
+    ax[1].fill_between(Theta, beta.pdf(Theta, a, b))
+    ax[1].set(xlabel = 'test',title = 'Prior(beta)')
+    ax[2].fill_between(Theta, beta.pdf(Theta, a, b))
+    ax[2].set(xlabel = 'test',title = 'Prior(beta)')
