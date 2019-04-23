@@ -14,7 +14,7 @@ N = 20                         # The total number of flips.
 z = 17                         # The number of heads.
 Data = c(rep(0,N-z),rep(1,z))  # Convert N and z into vector of 0's and 1's.
 
-openGraph(width=5,height=7)
+# openGraph(width=5,height=7)
 posterior = BernBeta( priorBetaAB=Prior, Data=Data , plotType="Bars" , 
                       showCentTend="Mode" , showHDI=TRUE , showpD=FALSE )
-saveGraph(file="BernBetaExample",type="png")
+# saveGraph(file="BernBetaExample",type="png")
