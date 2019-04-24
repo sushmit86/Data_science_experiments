@@ -76,7 +76,7 @@ def HDIofICDF (ICDFname,credMass=0.95,**kwargs):
     ICDFname is the inverse cdf for example : beta.ppf
     Use scipy minimize_scalar method. Default to
     return value: tuple of Highest density iterval (HDI)
-
+    example: udf.HDIofICDF(beta.ppf,a=18.25,b=6.75)
     '''
     incredMass =  1.0 - credMass
     def intervalWidth(lowTailPr):
@@ -85,19 +85,50 @@ def HDIofICDF (ICDFname,credMass=0.95,**kwargs):
     HDIlowTailPr = optInfo.x
     return (ICDFname(HDIlowTailPr,**kwargs),ICDFname(HDIlowTailPr+credMass,**kwargs))
 
-def BernBeta(priorBetaAB,Data):
+def BernBeta(priorBetaAB,Data, HDImass=0.95,showHDI=True):
     '''
     priorBetaAB: Tuple of beta(a,b) parameters
     '''
     # For notational convenience, rename components of priorBetaAB:
     a = priorBetaAB[0]
     b = priorBetaAB[1]
+
+    z = np.sum(Data) # No of heads
+    N = len(Data)
+
+    if len(priorBetaAB) != 2:
+        raise ValueError("priorBetaAB must be a tuple of two values")
+    if not(np.all((Data == 0) | (Data == 1))):
+        raise ValueError("Data values must be 0 or 1")
+    if any( _ < 0 for _ in priorBetaAB):
+        raise ValueError("priorBetaAB values must be nonnegative")
+
     fig, ax = plt.subplots(3, 1,figsize=(16, 16))
     Theta = np.arange(0.001,1, 0.001) # points for plotting
     pTheta = beta.pdf(Theta, a, b) # prior for plotting
-    ax[0].fill_between(Theta, beta.pdf(Theta, a, b))
-    ax[0].set(ylabel = 'test',title = 'Prior(beta)')
-    ax[1].fill_between(Theta, beta.pdf(Theta, a, b))
-    ax[1].set(xlabel = 'test',title = 'Prior(beta)')
+    pThetaGivenData = beta.pdf(Theta,a+z,b+N-z)
+    pDataGivenTheta = Theta**z *(1 - Theta)**(N-z)
+    ## Plotting the prior
+    ax[0].fill_between(Theta, pTheta)
+    ylabel = "Beta(θ|" + str(a) + ','+ str(b) + ")"
+    ax[0].set(ylabel = ylabel,title = 'Prior(beta)',xlabel= 'θ')
+    HDIinfo = HDIofICDF(beta.ppf,a=a,b=b)
+    HDIheight = stats.beta.pdf(HDIinfo,a=a,b=b).mean()
+    if showHDI:
+            ax[0].hlines(y=HDIheight,xmin = HDIinfo[0], xmax = HDIinfo[1])
+            ax[0].vlines(x=HDIinfo[0],ymin = 0, ymax = HDIheight,linestyles = 'dashed')
+            ax[0].vlines(x=HDIinfo[1],ymin = 0, ymax = HDIheight,linestyles = 'dashed')
+            s = str(int(HDImass*100)) + '% HDI'
+            ax[0].text(np.mean(HDIinfo), HDIheight + 0.00001,s,fontsize= 20)
+            ax[0].text(HDIinfo[0], HDIheight + 0.01,'{:04.3f}'.format(HDIinfo[0]),fontsize= 20)
+            ax[0].text(HDIinfo[1], HDIheight + 0.01,'{:04.3f}'.format(HDIinfo[1]),fontsize= 20)
+
+    ### plotting the likelihood
+    ax[1].fill_between(Theta, pDataGivenTheta)
+    ax[1].set(xlabel = 'θ',title = 'Likelihood(Bernoulli)',ylabel='p(D|θ)')
+    text = 'Data: z= {0}, N= {1}, max at  {2:.3f}'.format(z,N,np.max(pDataGivenTheta))
+    ax[1].text(0,0.7,text,transform=ax[1].transAxes,fontsize=20)
+
+
     ax[2].fill_between(Theta, beta.pdf(Theta, a, b))
     ax[2].set(xlabel = 'test',title = 'Prior(beta)')
