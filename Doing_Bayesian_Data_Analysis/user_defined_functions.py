@@ -126,8 +126,8 @@ def BernBeta(priorBetaAB,Data, HDImass=0.95,showHDI=True):
     ### plotting the likelihood
     ax[1].fill_between(Theta, pDataGivenTheta)
     ax[1].set(xlabel = 'θ',title = 'Likelihood(Bernoulli)',ylabel='p(D|θ)')
-    text = 'Data: z= {0}, N= {1}, max at  {2:.3f}'.format(z,N,np.max(pDataGivenTheta))
-    ax[1].text(0,0.7,text,transform=ax[1].transAxes,fontsize=20)
+    text = 'Data: z= {0}, N= {1}, max at  {2:.3f}'.format(z,N,Theta[np.argmax(pDataGivenTheta)])
+    ax[1].text(0,0.7,text,transform=ax[1].transAxes,fontsize=20,wrap=True)
 
 
     ax[2].fill_between(Theta, beta.pdf(Theta, a, b))
