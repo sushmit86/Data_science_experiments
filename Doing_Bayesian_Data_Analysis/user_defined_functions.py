@@ -144,3 +144,5 @@ def BernBeta(priorBetaAB,Data, HDImass=0.95,showHDI=True):
             ax[2].text(np.mean(HDIinfo), HDIheight + 0.00001,s,fontsize= 20)
             ax[2].text(HDIinfo[0], HDIheight + 0.01,'{:04.3f}'.format(HDIinfo[0]),fontsize= 20)
             ax[2].text(HDIinfo[1], HDIheight + 0.01,'{:04.3f}'.format(HDIinfo[1]),fontsize= 20)
+    plt.show()
+    return (a+z, b + N-z)
