@@ -119,7 +119,7 @@ def BernBeta(priorBetaAB,Data, HDImass=0.95,showHDI=True):
             ax[0].vlines(x=HDIinfo[0],ymin = 0, ymax = HDIheight,linestyles = 'dashed')
             ax[0].vlines(x=HDIinfo[1],ymin = 0, ymax = HDIheight,linestyles = 'dashed')
             s = str(int(HDImass*100)) + '% HDI'
-            ax[0].text(np.mean(HDIinfo), HDIheight + 0.00001,s,fontsize= 20)
+            ax[0].text(np.mean(HDIinfo), HDIheight + 0.5,s,fontsize= 20)
             ax[0].text(HDIinfo[0], HDIheight + 0.01,'{:04.3f}'.format(HDIinfo[0]),fontsize= 20)
             ax[0].text(HDIinfo[1], HDIheight + 0.01,'{:04.3f}'.format(HDIinfo[1]),fontsize= 20)
 
@@ -136,12 +136,12 @@ def BernBeta(priorBetaAB,Data, HDImass=0.95,showHDI=True):
     ax[2].set(ylabel = ylabel,title = 'Posterior(beta)',xlabel= 'θ')
     HDIinfo = HDIofICDF(beta.ppf,a=a+z,b=b+N-z)
     HDIheight = stats.beta.pdf(HDIinfo,a=a+z,b=b+N-z).mean()
-    if showHDI and (a+b-2) >0 :
+    if showHDI and (a+b+N-2) >0 :
             ax[2].hlines(y=HDIheight,xmin = HDIinfo[0], xmax = HDIinfo[1])
             ax[2].vlines(x=HDIinfo[0],ymin = 0, ymax = HDIheight,linestyles = 'dashed')
             ax[2].vlines(x=HDIinfo[1],ymin = 0, ymax = HDIheight,linestyles = 'dashed')
             s = str(int(HDImass*100)) + '% HDI'
-            ax[2].text(np.mean(HDIinfo), HDIheight + 0.00001,s,fontsize= 20)
+            ax[2].text(np.mean(HDIinfo), HDIheight + 0.5,s,fontsize= 20)
             ax[2].text(HDIinfo[0], HDIheight + 0.01,'{:04.3f}'.format(HDIinfo[0]),fontsize= 20)
             ax[2].text(HDIinfo[1], HDIheight + 0.01,'{:04.3f}'.format(HDIinfo[1]),fontsize= 20)
     plt.show()
