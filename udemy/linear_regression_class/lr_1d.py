@@ -40,6 +40,8 @@ denominator = X.dot(X) - X.mean() * X.sum()
 a = ( X.dot(Y) - Y.mean()*X.sum() ) / denominator
 b = ( Y.mean() * X.dot(X) - X.mean() * X.dot(Y) ) / denominator
 
+print(a,b)
+
 # let's calculate the predicted Y
 Yhat = a*X + b
 
