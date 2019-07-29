@@ -33,7 +33,7 @@ for line in open('moore.csv'):
 
 X = np.array(X)
 Y = np.array(Y)
-
+print(X,Y)
 plt.scatter(X, Y)
 plt.show()
 
