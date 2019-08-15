@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 
 
 # load the data
-X = []
+X =[]
 Y = []
 for line in open('data_2d.csv'):
     x1, x2, y = line.split(',')
@@ -33,7 +33,8 @@ fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 ax.scatter(X[:,0], X[:,1], Y)
 plt.show()
-
+print(X.shape)
+print(Y.shape)
 
 # apply the equations we learned to calculate a and b
 # numpy has a special method for solving Ax = b
@@ -41,6 +42,8 @@ plt.show()
 # note: the * operator does element-by-element multiplication in numpy
 #       np.dot() does what we expect for matrix multiplication
 w = np.linalg.solve(np.dot(X.T, X), np.dot(X.T, Y))
+print(w)
+print(w.shape)
 Yhat = np.dot(X, w)
 
 
