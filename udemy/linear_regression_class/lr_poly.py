@@ -27,6 +27,7 @@ X = np.array(X)
 Y = np.array(Y)
 
 # let's plot the data to see what it looks like
+
 plt.scatter(X[:,1], Y)
 plt.title("The data we're trying to fit")
 plt.show()
@@ -39,7 +40,7 @@ plt.show()
 #       np.dot() does what we expect for matrix multiplication
 w = np.linalg.solve(np.dot(X.T, X), np.dot(X.T, Y))
 
-
+print(w)
 # let's plot everything together to make sure it worked
 plt.scatter(X[:,1], Y)
 
