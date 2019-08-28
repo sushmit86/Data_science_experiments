@@ -13,7 +13,7 @@ from builtins import range
 
 
 import numpy as np
-
+np.random.seed(1)
 N = 100
 D = 2
 
@@ -22,7 +22,6 @@ X = np.random.randn(N,D)
 # ones = np.array([[1]*N]).T # old
 ones = np.ones((N, 1))
 Xb = np.concatenate((ones, X), axis=1)
-
 w = np.random.randn(D + 1)
 
 z = Xb.dot(w)
