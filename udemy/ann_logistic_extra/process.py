@@ -7,7 +7,7 @@ from builtins import range
 import numpy as np
 import pandas as pd
 import os
-
+np.random.seed(1)
 # so scripts from other folders can import this file
 dir_path = os.path.abspath(os.path.dirname(os.path.realpath(__file__)))
 
@@ -24,7 +24,7 @@ def get_data():
   data = df.values
 
   # shuffle it
-  np.random.shuffle(data)
+  #np.random.shuffle(data)
 
   # split features and labels
   X = data[:,:-1]
