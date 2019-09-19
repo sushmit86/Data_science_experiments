@@ -6,7 +6,7 @@ from builtins import range
 
 import numpy as np
 from process import get_binary_data
-
+np.random.seed(1)
 X, Y, _, _ = get_binary_data()
 
 # randomly initialize weights
