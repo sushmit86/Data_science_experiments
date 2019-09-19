@@ -13,6 +13,7 @@ from builtins import range
 
 
 import numpy as np
+np.random.seed(1)
 
 N = 100
 D = 2
