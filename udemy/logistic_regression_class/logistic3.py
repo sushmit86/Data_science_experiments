@@ -12,6 +12,7 @@ from builtins import range
 
 import numpy as np
 import matplotlib.pyplot as plt
+np.random.seed(1)
 
 N = 100
 D = 2
@@ -36,8 +37,9 @@ ones = np.ones((N, 1))
 Xb = np.concatenate((ones, X), axis=1)
 
 # randomly initialize the weights
-w = np.random.randn(D + 1)
 
+w = np.random.randn(D + 1)
+print(w)
 # calculate the model output
 z = Xb.dot(w)
 
@@ -72,6 +74,7 @@ for i in range(100):
 
 
 print("Final w:", w)
+
 
 # plot the data and separating line
 plt.scatter(X[:,0], X[:,1], c=T, s=100, alpha=0.5)
