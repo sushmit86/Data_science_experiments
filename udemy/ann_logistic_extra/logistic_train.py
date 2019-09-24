@@ -6,6 +6,7 @@ from builtins import range
 
 import numpy as np
 import matplotlib.pyplot as plt
+np.random.seed(1)
 
 from sklearn.utils import shuffle
 from process import get_binary_data
@@ -49,15 +50,18 @@ for i in range(10000):
     # gradient descent
     W -= learning_rate*Xtrain.T.dot(pYtrain - Ytrain)
     b -= learning_rate*(pYtrain - Ytrain).sum()
-    if i % 1000 == 0:
-        print(i, ctrain, ctest)
+#     if i % 1000 == 0:
+#         print(i, ctrain, ctest)
 
-print("Final train classification_rate:", classification_rate(Ytrain, np.round(pYtrain)))
-print("Final test classification_rate:", classification_rate(Ytest, np.round(pYtest)))
+# print("Final train classification_rate:", classification_rate(Ytrain, np.round(pYtrain)))
+# print("Final test classification_rate:", classification_rate(Ytest, np.round(pYtest)))
 
-legend1, = plt.plot(train_costs, label='train cost')
-legend2, = plt.plot(test_costs, label='test cost')
-plt.legend([legend1, legend2])
-plt.show()
+# legend1, = plt.plot(train_costs, label='train cost')
+# legend2, = plt.plot(test_costs, label='test cost')
+# plt.legend([legend1, legend2])
+# plt.show()
+print(Xtrain[49])
+print(W)
+print(b)
 
 
