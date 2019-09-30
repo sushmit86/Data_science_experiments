@@ -9,6 +9,7 @@ from builtins import range
 
 
 import numpy as np
+np.random.seed(1)
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 
@@ -63,3 +64,4 @@ plt.plot(true_w, label='true w')
 plt.plot(w, label='w_map')
 plt.legend()
 plt.show()
+print(costs[0:10])
