@@ -13,6 +13,7 @@ from builtins import range
 
 import numpy as np
 import matplotlib.pyplot as plt
+np.random.seed(1)
 
 N = 1000
 D = 2
@@ -84,3 +85,5 @@ plt.show()
 
 print("Final w:", w)
 print("Final classification rate:", 1 - np.abs(T - np.round(Y)).sum() / N)
+
+
