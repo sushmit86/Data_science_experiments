@@ -13,7 +13,7 @@ from builtins import range
 
 import numpy as np
 import matplotlib.pyplot as plt
-
+np.random.seed(1)
 Nclass = 500
 
 X1 = np.random.randn(Nclass, 2) + np.array([0, -2])
@@ -64,6 +64,6 @@ P = np.argmax(P_Y_given_X, axis=1)
 
 # verify we chose the correct axis
 assert(len(P) == len(Y))
-
+print(P_Y_given_X.shape)
+print(P_Y_given_X[0])
 print("Classification rate for randomly chosen weights:", classification_rate(Y, P))
-
