@@ -6,7 +6,7 @@ from builtins import range
 
 import numpy as np
 from process import get_data
-
+np.random.seed(1)
 X, Y, _, _ = get_data()
 
 # randomly initialize weights
@@ -17,7 +17,8 @@ W1 = np.random.randn(D, M)
 b1 = np.zeros(M)
 W2 = np.random.randn(M, K)
 b2 = np.zeros(K)
-
+print(X.shape)
+print(X[0])
 # make predictions
 def softmax(a):
     expA = np.exp(a)
@@ -34,5 +35,5 @@ predictions = np.argmax(P_Y_given_X, axis=1)
 # calculate the accuracy
 def classification_rate(Y, P):
     return np.mean(Y == P)
-
+print(P_Y_given_X[0])
 print("Score:", classification_rate(Y, predictions))
