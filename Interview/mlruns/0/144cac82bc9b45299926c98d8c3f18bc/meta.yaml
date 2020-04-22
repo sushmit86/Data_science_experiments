@@ -2,7 +2,7 @@ artifact_uri: file:///Users/roysu001/Personal_Git/Data_science_experiments/Inter
 end_time: 1587566593062
 entry_point_name: ''
 experiment_id: '0'
-lifecycle_stage: active
+lifecycle_stage: deleted
 name: ''
 run_id: 144cac82bc9b45299926c98d8c3f18bc
 run_uuid: 144cac82bc9b45299926c98d8c3f18bc

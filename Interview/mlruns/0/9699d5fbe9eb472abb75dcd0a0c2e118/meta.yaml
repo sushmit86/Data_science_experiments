@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/roysu001/Personal_Git/Data_science_experiments/Interview/mlruns/0/9699d5fbe9eb472abb75dcd0a0c2e118/artifacts
+end_time: 1587566933782
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+name: ''
+run_id: 9699d5fbe9eb472abb75dcd0a0c2e118
+run_uuid: 9699d5fbe9eb472abb75dcd0a0c2e118
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1587566933713
+status: 3
+tags: []
+user_id: roysu001
