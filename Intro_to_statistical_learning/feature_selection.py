@@ -19,12 +19,13 @@ class feature_selection():
         self.features = list(X.columns)
         self.best_subset_result_dict = {}
         self.forward_stepwise_result_dict = {}
+        self.backward_stepwise_result_dict = {}
     def best_subset_selection(self,num_features= 10):
         '''
         num_features : Number of features to iterate on pow(2,p) iteration will be executed
         '''
         
-        self.best_subset_result_dict.clear() ## clear the 
+        self.best_subset_result_dict.clear() ## clear the dictionary
         for i in (range(num_features+1)):
             if i == 0:
                 y_mean = self.y.mean()
@@ -51,7 +52,7 @@ class feature_selection():
         '''
         num_features : Number of features to iterate. There will be 1 + p*(p+1)/2 features
         '''
-        self.forward_stepwise_result_dict.clear()
+        self.forward_stepwise_result_dict.clear() ## clear the dictionary
         for i in (range(num_features+1)):
             if i == 0:
                 y_mean = self.y.mean()
@@ -74,6 +75,45 @@ class feature_selection():
                 best_feature = max(temp_dict_r2,key=temp_dict_r2.get)
                 self.forward_stepwise_result_dict[i] = {'feature' :tuple(best_feature), 'mse' :temp_dict_mse[best_feature],'r2':temp_dict_r2[best_feature]}
         return self.forward_stepwise_result_dict
+    
+    def backward_stepwise_selection(self, num_features = 10):
+        '''
+        num_features : Number of features to iterate. There will be 1 + p*(p+1)/2 features
+        Final Number of features to select from
+        '''
+        self.backward_stepwise_result_dict.clear() ## clear the dictionary
+        for i in range(len(self.features),num_features - 1,-1):
+            if i == 0:
+                y_mean = self.y.mean()
+                mse = mean_squared_error(self.y.values,len(self.y) * [y_mean])
+                self.backward_stepwise_result_dict[i] = {'feature' :(), 'mse' :mse,'r2':0}
+            elif i == len(self.features):
+                _y = self.y
+                _X = self.X.loc[:,self.features]
+                _X = sm.add_constant(_X)
+                _model = sm.OLS(_y,_X)
+                _results = _model.fit()
+                self.backward_stepwise_result_dict[i] = {'feature' :tuple(self.features), 'mse' :_results.mse_model,'r2':_results.rsquared}
+            else :
+                temp_dict_mse = {}
+                temp_dict_r2 = {}   
+                _p_plus_one_feature = list(self.backward_stepwise_result_dict[i+1]['feature'])
+                for _feature in _p_plus_one_feature:
+                    _new_feature = _p_plus_one_feature.copy()
+                    #print(_new_feature)
+                    _new_feature.remove(_feature)
+                    _new_feature = tuple(_new_feature)
+                    #print(_new_feature)
+                    _y = self.y
+                    _X = self.X.loc[:,_new_feature]
+                    _X = sm.add_constant(_X)
+                    _model = sm.OLS(_y,_X)
+                    _results = _model.fit()
+                    temp_dict_mse[_new_feature] = _results.mse_model
+                    temp_dict_r2[_new_feature] = _results.rsquared
+                best_feature = max(temp_dict_r2,key=temp_dict_r2.get)
+                self.backward_stepwise_result_dict[i] = {'feature' :tuple(best_feature), 'mse' :temp_dict_mse[best_feature],'r2':temp_dict_r2[best_feature]}
+        return self.backward_stepwise_result_dict
 
     def select_best_model(self, model_type = 'best_subset'):
         '''
@@ -84,6 +124,11 @@ class feature_selection():
             result_dict = self.best_subset_result_dict
         elif model_type == 'forward_stepwise':
             result_dict = self.forward_stepwise_result_dict
+        elif model_type == 'backward_stepwise':
+            result_dict = self.backward_stepwise_result_dict
+        else:
+            print('This is invalid entry')
+            return 0
         
         for p in result_dict.keys():
             if p == 0:
@@ -102,6 +147,7 @@ class feature_selection():
                 result_dict[p]['adjusted_r2'] = _results.rsquared_adj
                 result_dict[p]['params'] = _results.params
         return result_dict
+
 
             
             
